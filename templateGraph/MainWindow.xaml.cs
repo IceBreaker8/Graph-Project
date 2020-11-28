@@ -12,7 +12,7 @@ namespace templateGraph {
 
     public partial class MainWindow : Window {
 
-        //buttons management
+        //buttons management here
         public List<Button> Vertices = new List<Button>();
         public static List<Relation> Relations = new List<Relation>();
 
