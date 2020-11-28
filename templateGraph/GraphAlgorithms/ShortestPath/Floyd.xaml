@@ -1,0 +1,26 @@
+﻿<Window x:Class="templateGraph.GraphAlgorithms.Floyd"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:templateGraph.GraphAlgorithms"
+        mc:Ignorable="d"
+        Title="Floyd" Height="auto" Width="820" Closed="Window_Closed">
+    <Grid>
+        <Grid Margin="0,0,-0.4,0">
+            <ScrollViewer Name="sv1"
+            
+            HorizontalScrollBarVisibility="auto" VerticalScrollBarVisibility="auto"
+                          Margin="10,0,0,0">
+
+                <Canvas x:Name="text">
+                </Canvas>
+
+
+            </ScrollViewer>
+
+        </Grid>
+
+
+    </Grid>
+</Window>
