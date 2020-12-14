@@ -77,8 +77,9 @@ namespace Graph.Controllers {
 
         private void LoadAndSetVertices(GraphData objectToRead) {
             try {
+                CanvasAndClickCont c = new CanvasAndClickCont(mainWindow, true);
                 foreach (var b in objectToRead.getButtons()) {
-                    new CanvasAndClickCont(mainWindow, true).CreateButton(new Point(b.Value.a, b.Value.b), b.Key);
+                    c.CreateButton(new Point(b.Value.a, b.Value.b), b.Key);
 
                 }
             }

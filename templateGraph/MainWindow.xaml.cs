@@ -16,11 +16,13 @@ namespace templateGraph {
         public List<Button> Vertices = new List<Button>();
         public static List<Relation> Relations = new List<Relation>();
 
+        
+
         public MainWindow() {
-           
-                InitializeComponent();
-            
-            
+
+            InitializeComponent();
+
+
             //centering window
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             //registering events

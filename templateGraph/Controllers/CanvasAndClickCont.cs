@@ -17,7 +17,7 @@ namespace Graph.Controllers {
         private MenuItem Creation;
         private MenuItem CancelAlgo;
         public CanvasAndClickCont(MainWindow mainWindow, bool pass) {
-
+            
             this.mainWindow = mainWindow;
 
             IsDragging = false;
@@ -139,7 +139,6 @@ namespace Graph.Controllers {
             restore
         }
         private void ThrowVertexConnectionError() {
-            MessageBox.Show("throw error");
             StartButton = null;
             didStart = false;
             MainWindow.Relations.Remove(firstRelation);
@@ -235,7 +234,7 @@ namespace Graph.Controllers {
             MainWindow.Relations.Add(firstRelation);
             SelectOtherButtons(b, Mode.auto);
             IsDragging = false;
-            MessageBox.Show(StartButton.Content.ToString());
+            
         }
         private void VertexMouseDrag(object sender, MouseEventArgs e) {
             if (!IsDragging)
@@ -246,7 +245,7 @@ namespace Graph.Controllers {
             }
             Point canvasRelativePosition = e.GetPosition(mainWindow.Canv);
             ((Button)sender).Margin = new Thickness(canvasRelativePosition.X - 23, canvasRelativePosition.Y - 13, 0, 0);
-            //update boxes locations
+            
             foreach (Button button in mainWindow.Vertices) {
                 if (CanvasAndClickCont.butDict.ContainsKey(button))
                     CanvasAndClickCont.butDict[button].UpdatePosition();
