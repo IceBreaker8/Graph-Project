@@ -143,7 +143,7 @@ namespace templateGraph {
             this.polygon.Points = points;
             this.polygon.Fill = Color;
             this.polygon.IsHitTestVisible = true;
-            //TODO AddEvents();
+            
             this.Canv.Children.Add(this.polygon);
             Canvas.SetZIndex(polygon, 0);
             if (!CurveMade) {

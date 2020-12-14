@@ -17,7 +17,7 @@ namespace Graph.Controllers {
         private MenuItem Creation;
         private MenuItem CancelAlgo;
         public CanvasAndClickCont(MainWindow mainWindow, bool pass) {
-            
+
             this.mainWindow = mainWindow;
 
             IsDragging = false;
@@ -118,7 +118,7 @@ namespace Graph.Controllers {
         /* =================================== Button events ================================================ */
         public Button StartButton;
         //button
-        private int maxButtonNameLength = 53;
+        private int maxButtonNameLength = 6;
         //other
         private Control draggedItem;
         private Point ItemRelativePosition;
@@ -234,7 +234,7 @@ namespace Graph.Controllers {
             MainWindow.Relations.Add(firstRelation);
             SelectOtherButtons(b, Mode.auto);
             IsDragging = false;
-            
+
         }
         private void VertexMouseDrag(object sender, MouseEventArgs e) {
             if (!IsDragging)
@@ -245,7 +245,7 @@ namespace Graph.Controllers {
             }
             Point canvasRelativePosition = e.GetPosition(mainWindow.Canv);
             ((Button)sender).Margin = new Thickness(canvasRelativePosition.X - 23, canvasRelativePosition.Y - 13, 0, 0);
-            
+
             foreach (Button button in mainWindow.Vertices) {
                 if (CanvasAndClickCont.butDict.ContainsKey(button))
                     CanvasAndClickCont.butDict[button].UpdatePosition();
@@ -293,6 +293,16 @@ namespace Graph.Controllers {
                         InputBox inputDialog = new InputBox("Transition Number:");
 
                         if (inputDialog.ShowDialog() == true && inputDialog.Answer != "") {
+                            try {
+                                Int32.Parse(inputDialog.Answer);
+                            }
+                            catch (Exception ex) {
+                                MessageBox.Show(ex.Message, "Alert",
+                                        MessageBoxButton.OK, MessageBoxImage.Warning);
+
+                                ThrowVertexConnectionError();
+                                return;
+                            }
                             Button b = (Button)sender;
 
                             if (CheckIfRelationExists(b, StartButton)) {
@@ -359,7 +369,7 @@ namespace Graph.Controllers {
                     return;
                 }
                 else if (ButtonName.Length > maxButtonNameLength) {
-                    MessageBox.Show("Your vertex name is too long", "Info",
+                    MessageBox.Show("Your vertex name is too long (Max is " + maxButtonNameLength + ")!", "Info",
                     MessageBoxButton.OK, MessageBoxImage.Information);
                     return;
 
