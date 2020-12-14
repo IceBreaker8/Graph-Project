@@ -91,6 +91,7 @@ namespace Graph.Controllers {
             List<List<string>> listToLoad = objectToRead.getMyList();
 
             foreach (var list in listToLoad) {
+                
                 Relation relation = new Relation(getButtonByName(list[0]));
                 MainWindow.Relations.Add(relation);
 
@@ -99,7 +100,10 @@ namespace Graph.Controllers {
                 relation.isConnected = true;
 
 
+
             }
+
+            mainWindow.UpdateLayout();
         }
         private Button getButtonByName(string name) {
             foreach (var button in mainWindow.Vertices) {
@@ -154,7 +158,7 @@ namespace Graph.Controllers {
                     MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
-            
+
             FileCreator.LoadFile();
             if (FileCreator.path != null) {
                 clearCanvas();

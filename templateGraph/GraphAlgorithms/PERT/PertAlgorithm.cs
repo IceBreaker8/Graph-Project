@@ -214,6 +214,11 @@ namespace Graph.GraphAlgorithms.PERT {
         }
 
         private bool HasCurvedArrow() {
+            foreach (Relation relation in MainWindow.Relations) {
+                if (relation.CurveMade == true) {
+                    return false;
+                }
+            }
             return true;
         }
 

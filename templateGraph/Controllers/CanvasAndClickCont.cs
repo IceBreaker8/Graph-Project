@@ -48,7 +48,7 @@ namespace Graph.Controllers {
         private void AlgoCancel(object sender, RoutedEventArgs e) {
             if (AlgoController.BellmanOnOnce || AlgoController.DijktraOnOnce) {
                 ClearCanvasColor();
-                
+
             }
             else if (PertAlgorithm.PertRunning) {
                 ClearCanvasColor();
@@ -116,7 +116,7 @@ namespace Graph.Controllers {
         public static Dictionary<Button, VertexTupleBox> butDict =
             new Dictionary<Button, VertexTupleBox>();
         /* =================================== Button events ================================================ */
-        private Button StartButton;
+        public Button StartButton;
         //button
         private int maxButtonNameLength = 53;
         //other
@@ -139,12 +139,14 @@ namespace Graph.Controllers {
             restore
         }
         private void ThrowVertexConnectionError() {
+            MessageBox.Show("throw error");
             StartButton = null;
             didStart = false;
             MainWindow.Relations.Remove(firstRelation);
             firstRelation = null;
             SelectOtherButtons(null, Mode.restore);
             IsDragging = false;
+
             ColorCanvas(AlgoMode.OFF);
         }
         public enum AlgoMode {
@@ -199,6 +201,7 @@ namespace Graph.Controllers {
             }
         }
         private void VertexMouseLeftClickUp(object sender, MouseButtonEventArgs e) {
+
             if (!IsDragging)
                 return;
 
@@ -226,11 +229,13 @@ namespace Graph.Controllers {
 
             Button b = (Button)sender;
             StartButton = b;
+
             firstRelation = new Relation(b);
             didStart = true;
             MainWindow.Relations.Add(firstRelation);
             SelectOtherButtons(b, Mode.auto);
             IsDragging = false;
+            MessageBox.Show(StartButton.Content.ToString());
         }
         private void VertexMouseDrag(object sender, MouseEventArgs e) {
             if (!IsDragging)
@@ -267,6 +272,7 @@ namespace Graph.Controllers {
         }
         private void VertexLeftClickDown(object sender, MouseButtonEventArgs e) {
             //is connection started
+
             if (StartButton == (Button)sender && didStart == true) {
                 MessageBox.Show("You can't link a button to itself!", "Alert",
                     MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -278,16 +284,18 @@ namespace Graph.Controllers {
                     MessageBoxButton.OK, MessageBoxImage.Warning);
                 ThrowVertexConnectionError();
                 return;
+
             }
-
-
 
             if (MainWindow.Relations.Count != 0) {
                 foreach (Relation r in MainWindow.Relations) {
                     if (r.Constarted == true && r.isConnected == false) {
+
                         InputBox inputDialog = new InputBox("Transition Number:");
+
                         if (inputDialog.ShowDialog() == true && inputDialog.Answer != "") {
                             Button b = (Button)sender;
+
                             if (CheckIfRelationExists(b, StartButton)) {
                                 r.StartConnection(b, mainWindow,
                                     mainWindow.Canv, Int32.Parse(inputDialog.Answer), true);
@@ -296,7 +304,7 @@ namespace Graph.Controllers {
                                 didStart = false;
                                 SelectOtherButtons(null, Mode.restore);
 
-                                return;//TODO
+                                return;
                             }
                             else {
                                 r.StartConnection(b, mainWindow,
@@ -311,15 +319,14 @@ namespace Graph.Controllers {
 
                         }
                         else {
+
                             ThrowVertexConnectionError();
                             return;
                         }
-
                     }
                 }
-
-
             }
+
             IsDragging = true;
             draggedItem = (Button)sender;
             ItemRelativePosition = e.GetPosition(draggedItem);
@@ -327,9 +334,11 @@ namespace Graph.Controllers {
 
         }
         private bool CheckIfRelationExists(Button begin, Button end) {
+
             foreach (Relation R in MainWindow.Relations) {
-                if (R.ConStart == begin && R.ConEnd == end) {
-                    return true;
+                if (R.ConStart == begin && R.ConEnd == end || R.ConStart == end && R.ConEnd == begin) {
+                    if (R.CurveMade == false)
+                        return true;
                 }
             }
             return false;
