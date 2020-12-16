@@ -6,6 +6,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using Graph.Controllers;
 using Graph.Controllers.AlgorithmController;
+using static Graph.Utils.AlgoModeManager;
 
 namespace templateGraph {
 
@@ -66,9 +67,7 @@ namespace templateGraph {
             }
             ColorCanvas(AlgoMode.OFF);
         }
-        public enum AlgoMode {
-            ON, OFF
-        }
+        
 
         public void ColorCanvas(AlgoMode algomode) {
             if (algomode == AlgoMode.ON)

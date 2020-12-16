@@ -9,6 +9,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using templateGraph;
 using templateGraph.GraphAlgorithms;
+using static Graph.Utils.AlgoModeManager;
 
 namespace Graph.Controllers.AlgorithmController {
     class AlgoController {
@@ -99,7 +100,7 @@ namespace Graph.Controllers.AlgorithmController {
             DijktraOnOnce = true;
             OneStartOnly = true;
             if (AlgoStart == null) {
-                mainWindow.ColorCanvas(MainWindow.AlgoMode.ON);
+                mainWindow.ColorCanvas(AlgoMode.ON);
                 MessageBox.Show("Please select the starting vertex!", "Info",
                     MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
@@ -127,7 +128,7 @@ namespace Graph.Controllers.AlgorithmController {
             BellmanOnOnce = true;
             OneStartOnly = true;
             if (AlgoStart == null) {
-                mainWindow.ColorCanvas(MainWindow.AlgoMode.ON);
+                mainWindow.ColorCanvas(AlgoMode.ON);
                 MessageBox.Show("Please select the starting vertex!", "Info",
                     MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
@@ -136,7 +137,7 @@ namespace Graph.Controllers.AlgorithmController {
 
         private void AmelioratedBellman(object sender, RoutedEventArgs e) {
             if (AlgoStarted || algorunning) {
-                mainWindow.ColorCanvas(MainWindow.AlgoMode.ON);
+                mainWindow.ColorCanvas(AlgoMode.ON);
                 MessageBox.Show("There is already another active algorithm!", "Alert",
                     MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
@@ -157,7 +158,7 @@ namespace Graph.Controllers.AlgorithmController {
             BellmanOnOnce = true;
             OneStartOnly = true;
             if (AlgoStart == null) {
-                mainWindow.ColorCanvas(MainWindow.AlgoMode.ON);
+                mainWindow.ColorCanvas(AlgoMode.ON);
                 MessageBox.Show("Please select the starting vertex!", "Info",
                     MessageBoxButton.OK, MessageBoxImage.Information);
                 return;

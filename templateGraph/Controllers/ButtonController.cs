@@ -11,6 +11,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using templateGraph;
+using static Graph.Utils.AlgoModeManager;
 
 namespace Graph.Controllers {
     class ButtonController {
@@ -210,9 +211,7 @@ namespace Graph.Controllers {
 
             }
         }
-        public enum AlgoMode {
-            ON, OFF
-        }
+        
         public void ClearCanvasColor() {
             ColorCanvas(AlgoMode.OFF);
             AlgoController.BellmanOnOnce = false;
@@ -334,7 +333,7 @@ namespace Graph.Controllers {
                 R.RestoreArrowColor();
 
             }
-            mainWindow.ColorCanvas(MainWindow.AlgoMode.OFF);
+            mainWindow.ColorCanvas(AlgoMode.OFF);
         }
         public void RestoreColor() {
             foreach (Relation R in MainWindow.Relations) {

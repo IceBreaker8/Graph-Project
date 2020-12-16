@@ -130,6 +130,7 @@
     <Compile Include="Serialization\FileCreator.cs" />
     <Compile Include="Serialization\GraphData.cs" />
     <Compile Include="Serialization\Pos.cs" />
+    <Compile Include="Utils\AlgoModeManager.cs" />
     <Compile Include="Utils\GridDisplay.cs" />
     <Compile Include="VertexConnections\Relation.cs" />
     <Compile Include="VertexConnections\VertexRank.cs" />

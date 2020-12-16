@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using templateGraph;
+using static Graph.Utils.AlgoModeManager;
 
 namespace Graph.Controllers {
     class CanvasAndClickCont {
@@ -141,6 +142,7 @@ namespace Graph.Controllers {
         private void ThrowVertexConnectionError() {
             StartButton = null;
             didStart = false;
+            AlgoController.AlgoStarted = false;
             MainWindow.Relations.Remove(firstRelation);
             firstRelation = null;
             SelectOtherButtons(null, Mode.restore);
@@ -148,9 +150,7 @@ namespace Graph.Controllers {
 
             ColorCanvas(AlgoMode.OFF);
         }
-        public enum AlgoMode {
-            ON, OFF
-        }
+        
         public void ColorCanvas(AlgoMode algomode) {
             if (algomode == AlgoMode.ON)
                 mainWindow.Canv.Background = new SolidColorBrush(Colors.LightGray);
@@ -225,7 +225,7 @@ namespace Graph.Controllers {
             }
 
             ///color canvas
-
+            AlgoController.AlgoStarted = true;
             Button b = (Button)sender;
             StartButton = b;
 
@@ -312,7 +312,7 @@ namespace Graph.Controllers {
                                 r.isConnected = true;
                                 didStart = false;
                                 SelectOtherButtons(null, Mode.restore);
-
+                                AlgoController.AlgoStarted = false;
                                 return;
                             }
                             else {
@@ -322,7 +322,7 @@ namespace Graph.Controllers {
                                 r.isConnected = true;
                                 didStart = false;
                                 SelectOtherButtons(null, Mode.restore);
-
+                                AlgoController.AlgoStarted = false;
                                 return;
                             }
 

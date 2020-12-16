@@ -135,11 +135,11 @@ namespace Graph.Controllers {
         /* ====================================== METHODS =======================================================*/
 
         private void SaveData() {
-            //if (AlgoController.AlgoStarted || AlgoController.algorunning) {
-            //    MessageBox.Show("You can't save while an algorithm is running!", "Alert",
-            //        MessageBoxButton.OK, MessageBoxImage.Warning);
+            if (AlgoController.AlgoStarted || AlgoController.algorunning) {
+                MessageBox.Show("You can't save while an algorithm is running!", "Alert",
+                    MessageBoxButton.OK, MessageBoxImage.Warning);
 
-            //}
+            }
             if (FileCreator.path != null) {
 
                 DataSaver.WriteToBinaryFile<GraphData>(FileCreator.path, SaveAllGraphData()); //save the data after its loaded

@@ -42,7 +42,7 @@
 
                 </MenuItem>
 
-                <MenuItem Header="Ordonnancement">
+                <MenuItem Header="Task Algorithms">
                     <MenuItem Name="PERT" Header="MPM Algorithm"/>
                     <MenuItem Name="Critical" Header="Critical Paths"/>
                 </MenuItem>
