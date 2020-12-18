@@ -6,7 +6,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using Graph.Controllers;
 using Graph.Controllers.AlgorithmController;
-using static Graph.Utils.AlgoModeManager;
+using Graph.Utils;
 
 namespace templateGraph {
 
@@ -65,12 +65,12 @@ namespace templateGraph {
                 R.RestoreArrowColor();
 
             }
-            ColorCanvas(AlgoMode.OFF);
+            ColorCanvas(EAlgoMode.OFF);
         }
         
 
-        public void ColorCanvas(AlgoMode algomode) {
-            if (algomode == AlgoMode.ON)
+        public void ColorCanvas(EAlgoMode algomode) {
+            if (algomode == EAlgoMode.ON)
                 this.Canv.Background = new SolidColorBrush(Colors.LightGray);
             else
                 this.Canv.Background = new SolidColorBrush(Colors.White);

@@ -7,7 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using templateGraph;
-using static Graph.Utils.AlgoModeManager;
+using Graph.Utils;
 
 namespace Graph.Controllers {
     class CanvasAndClickCont {
@@ -39,7 +39,7 @@ namespace Graph.Controllers {
         }
 
         public void ClearCanvasColor() {
-            ColorCanvas(AlgoMode.OFF);
+            ColorCanvas(EAlgoMode.OFF);
             AlgoController.BellmanOnOnce = false;
             AlgoController.DijktraOnOnce = false;
             AlgoController.AlgoStarted = false;
@@ -148,11 +148,11 @@ namespace Graph.Controllers {
             SelectOtherButtons(null, Mode.restore);
             IsDragging = false;
 
-            ColorCanvas(AlgoMode.OFF);
+            ColorCanvas(EAlgoMode.OFF);
         }
         
-        public void ColorCanvas(AlgoMode algomode) {
-            if (algomode == AlgoMode.ON)
+        public void ColorCanvas(EAlgoMode algomode) {
+            if (algomode == EAlgoMode.ON)
                 mainWindow.Canv.Background = new SolidColorBrush(Colors.LightGray);
             else
                 mainWindow.Canv.Background = new SolidColorBrush(Colors.White);

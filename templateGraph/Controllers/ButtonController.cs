@@ -11,7 +11,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using templateGraph;
-using static Graph.Utils.AlgoModeManager;
+using Graph.Utils;
 
 namespace Graph.Controllers {
     class ButtonController {
@@ -213,14 +213,14 @@ namespace Graph.Controllers {
         }
         
         public void ClearCanvasColor() {
-            ColorCanvas(AlgoMode.OFF);
+            ColorCanvas(EAlgoMode.OFF);
             AlgoController.BellmanOnOnce = false;
             AlgoController.DijktraOnOnce = false;
             AlgoController.AlgoStarted = false;
 
         }
-        public void ColorCanvas(AlgoMode algomode) {
-            if (algomode == AlgoMode.ON)
+        public void ColorCanvas(EAlgoMode algomode) {
+            if (algomode == EAlgoMode.ON)
                 mainWindow.Canv.Background = new SolidColorBrush(Colors.LightGray);
             else
                 mainWindow.Canv.Background = new SolidColorBrush(Colors.White);
@@ -333,7 +333,7 @@ namespace Graph.Controllers {
                 R.RestoreArrowColor();
 
             }
-            mainWindow.ColorCanvas(AlgoMode.OFF);
+            mainWindow.ColorCanvas(EAlgoMode.OFF);
         }
         public void RestoreColor() {
             foreach (Relation R in MainWindow.Relations) {

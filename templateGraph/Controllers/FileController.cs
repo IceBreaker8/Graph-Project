@@ -138,7 +138,7 @@ namespace Graph.Controllers {
             if (AlgoController.AlgoStarted || AlgoController.algorunning) {
                 MessageBox.Show("You can't save while an algorithm is running!", "Alert",
                     MessageBoxButton.OK, MessageBoxImage.Warning);
-
+                return;
             }
             if (FileCreator.path != null) {
 
