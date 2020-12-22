@@ -6,6 +6,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using Graph.Controllers;
 using Graph.Controllers.AlgorithmController;
+using Graph.Updater;
 using Graph.Utils;
 
 namespace templateGraph {
@@ -22,7 +23,8 @@ namespace templateGraph {
         public MainWindow() {
 
             InitializeComponent();
-
+            //check for updates
+            new UpdateChecker();
 
             //centering window
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
@@ -68,7 +70,7 @@ namespace templateGraph {
             ColorCanvas(EAlgoMode.OFF);
         }
         
-
+        //NEW THIS
         public void ColorCanvas(EAlgoMode algomode) {
             if (algomode == EAlgoMode.ON)
                 this.Canv.Background = new SolidColorBrush(Colors.LightGray);

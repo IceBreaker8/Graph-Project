@@ -25,11 +25,13 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
+    <UpdateUrl>https://download1582.mediafire.com/7g7h6o3owpyg/fy9dwr7zzjuzs1s/graphice.rar/</UpdateUrl>
     <TargetCulture>en</TargetCulture>
-    <ProductName>Graph</ProductName>
+    <ProductName>GraphICE</ProductName>
     <PublisherName>IceDev</PublisherName>
+    <WebPage>publish.htm</WebPage>
     <AutorunEnabled>true</AutorunEnabled>
-    <ApplicationRevision>14</ApplicationRevision>
+    <ApplicationRevision>22</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -130,6 +132,8 @@
     <Compile Include="Serialization\FileCreator.cs" />
     <Compile Include="Serialization\GraphData.cs" />
     <Compile Include="Serialization\Pos.cs" />
+    <Compile Include="Updater\UpdateChecker.cs" />
+    <Compile Include="Updater\UpdateWindow.cs" />
     <Compile Include="Utils\AlgoModeManager.cs" />
     <Compile Include="Utils\GridDisplay.cs" />
     <Compile Include="VertexConnections\Relation.cs" />
