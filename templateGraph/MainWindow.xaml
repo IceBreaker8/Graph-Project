@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:templateGraph"
         mc:Ignorable="d"
-        Title="Graph"
-        WindowState="Maximized">
+        Title="GraphICE"
+        WindowState="Maximized"
+       >
 
 
     <DockPanel>
@@ -49,7 +50,11 @@
 
             </MenuItem>
 
-            <MenuItem Name ="Help" Header="_Help" Width="36" Height="19" FontWeight="Normal" FontStyle="Normal">
+            <MenuItem Name ="Help" Header="_Help" 
+                      Width="36" Height="19" FontWeight="Normal" FontStyle="Normal">
+                <MenuItem Name="Update" Header="Check For Updates"/>
+                <MenuItem Name="Tutorial" Header="Tutorial"/>
+                <MenuItem Name="Report" Header="Report a bug"/>
             </MenuItem>
         </Menu>
         <Canvas Height="auto" Width="auto" Name="Canv" 

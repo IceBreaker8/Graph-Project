@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
+using System.Net.Mail;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -18,17 +20,20 @@ namespace templateGraph {
         public List<Button> Vertices = new List<Button>();
         public static List<Relation> Relations = new List<Relation>();
 
-        
+       
 
         public MainWindow() {
 
             InitializeComponent();
+            
+
             //check for updates
-            new UpdateChecker();
+            new UpdateChecker().CheckForUpdate(false);
 
             //centering window
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             //registering events
+            new HelpController(this);
             new FileController(this);
             new VertexRankController(this);
             new AlgoController(this);
@@ -69,7 +74,7 @@ namespace templateGraph {
             }
             ColorCanvas(EAlgoMode.OFF);
         }
-        
+
         //NEW THIS
         public void ColorCanvas(EAlgoMode algomode) {
             if (algomode == EAlgoMode.ON)

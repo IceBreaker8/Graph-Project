@@ -31,7 +31,7 @@
     <PublisherName>IceDev</PublisherName>
     <WebPage>publish.htm</WebPage>
     <AutorunEnabled>true</AutorunEnabled>
-    <ApplicationRevision>22</ApplicationRevision>
+    <ApplicationRevision>24</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -58,10 +58,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>87503B2ECE1B8DB99A8338BE7BBA48E052B3E250</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>2EA4A803B1B083B5400C6752E5B7AE7E3AA5ACF2</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>templateGraph_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>Graph_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -115,6 +115,7 @@
     <Compile Include="Controllers\ButtonController.cs" />
     <Compile Include="Controllers\CanvasAndClickCont.cs" />
     <Compile Include="Controllers\FileController.cs" />
+    <Compile Include="Controllers\HelpController.cs" />
     <Compile Include="Controllers\OrdonAlgorithm.cs" />
     <Compile Include="Controllers\VertexRankController.cs" />
     <Compile Include="GraphAlgorithms\PERT\CriticalPath.cs" />
@@ -199,6 +200,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Graph_TemporaryKey.pfx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

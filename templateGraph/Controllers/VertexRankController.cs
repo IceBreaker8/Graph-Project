@@ -34,6 +34,7 @@ namespace Graph.Controllers {
             SortVertices.Click += SortVerticesByRank;
             PositionVertices.Click += PositioningVertices;
             DisplayRank.Click += DisplayRanks;
+            
         }
         private void DisplayRanks(object sender, RoutedEventArgs e) {
             if (mainWindow.Vertices.Count == 0) {

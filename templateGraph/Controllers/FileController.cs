@@ -42,8 +42,14 @@ namespace Graph.Controllers {
             New.Click += New_Click;
             Save.Click += Save_Click;
             Open.Click += Open_Click;
+            Exit.Click += Exit_Click;
             mainWindow.Closing += Window_Closing;
             mainWindow.KeyDown += Save_KeyDown;
+            
+        }
+
+        private void Exit_Click(object sender, RoutedEventArgs e) {
+            CloseAndCleanApp();
         }
 
         private void New_Click(object sender, RoutedEventArgs e) {

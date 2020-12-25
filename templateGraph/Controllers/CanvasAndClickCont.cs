@@ -36,6 +36,7 @@ namespace Graph.Controllers {
             Creation.Click += CreateButtonMenu;
             CancelAlgo.Click += AlgoCancel;
             mainWindow.Canv.MouseRightButtonDown += CanvMouseRightButtonUp;
+           
         }
 
         public void ClearCanvasColor() {
@@ -59,6 +60,15 @@ namespace Graph.Controllers {
                 PertAlgorithm.RemoveAlgorithmBoxes();
                 PertAlgorithm.PertRunning = false;
             }
+            else if (AlgoController.F != null) {
+                AlgoController.F.Close();
+            }
+            else if (AlgoController.D != null) {
+                AlgoController.D.Close();
+            }
+            else if (AlgoController.B != null) {
+                AlgoController.B.Close();
+            }
             else {
                 MessageBox.Show("There are no algorithms to cancel!", "Alert",
                     MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -67,6 +77,7 @@ namespace Graph.Controllers {
         }
 
         private void CanvMouseRightButtonUp(object sender, MouseButtonEventArgs e) {
+
             if (Relation.ArrowMenu.IsOpen) {
                 CanvMenu.IsOpen = false;
                 return;
@@ -150,7 +161,7 @@ namespace Graph.Controllers {
 
             ColorCanvas(EAlgoMode.OFF);
         }
-        
+
         public void ColorCanvas(EAlgoMode algomode) {
             if (algomode == EAlgoMode.ON)
                 mainWindow.Canv.Background = new SolidColorBrush(Colors.LightGray);
@@ -236,6 +247,7 @@ namespace Graph.Controllers {
             IsDragging = false;
 
         }
+        
         private void VertexMouseDrag(object sender, MouseEventArgs e) {
             if (!IsDragging)
                 return;
@@ -244,7 +256,20 @@ namespace Graph.Controllers {
                 UpdateRelations(b);
             }
             Point canvasRelativePosition = e.GetPosition(mainWindow.Canv);
-            ((Button)sender).Margin = new Thickness(canvasRelativePosition.X - 23, canvasRelativePosition.Y - 13, 0, 0);
+
+
+            if (Keyboard.IsKeyDown(Key.H)) {
+                b.Margin =
+                    new Thickness(canvasRelativePosition.X - 23, b.Margin.Top, 0, 0);
+            }
+            else if (Keyboard.IsKeyDown(Key.V)) {
+                b.Margin =
+                    new Thickness(b.Margin.Left, canvasRelativePosition.Y - 23, 0, 0);
+            }
+            else {
+                b.Margin =
+                    new Thickness(canvasRelativePosition.X - 23, canvasRelativePosition.Y - 23, 0, 0);
+            }
 
             foreach (Button button in mainWindow.Vertices) {
                 if (CanvasAndClickCont.butDict.ContainsKey(button))
@@ -252,6 +277,7 @@ namespace Graph.Controllers {
 
             }
         }
+        
         public void UpdateRelations(Button b) {
             foreach (Relation r in MainWindow.Relations) {
                 if (r.ConStart == b || r.ConEnd == b)

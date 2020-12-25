@@ -8,20 +8,25 @@ using System.Windows;
 namespace Graph.Updater {
     class UpdateWindow {
 
-
+        private string downloadLink = "http://graphice.me/#downloads";
         private short DelayTime = 1;
-        public UpdateWindow() {
-            _ = Delay();
+        public UpdateWindow(bool verif) {
+            if (verif)
+                _ = Delay(0);
+            else
+                _ = Delay(DelayTime);
+
         }
 
-        private async Task Delay() {
+        private async Task Delay(short delay) {
             try {
-                await Task.Delay(DelayTime * 1000);
-                MessageBoxResult result = MessageBox.Show("There is a new version available for download, would you like to download it now?", "Update"
+                await Task.Delay(delay * 1000);
+                MessageBoxResult result = 
+                    MessageBox.Show("There is a new version available for download, would you like to download it now?", "Update"
                     , MessageBoxButton.YesNo, MessageBoxImage.Information);
                 if (result == MessageBoxResult.Yes) {
                     //redirect link
-                    System.Diagnostics.Process.Start("http://graphice.me");
+                    System.Diagnostics.Process.Start(downloadLink);
                 }
                 else if (result == MessageBoxResult.No) {
                     //cancel
