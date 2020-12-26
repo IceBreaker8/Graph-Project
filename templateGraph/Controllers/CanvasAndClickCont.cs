@@ -258,25 +258,24 @@ namespace Graph.Controllers {
             if (MainWindow.Relations.Count != 0) {
                 UpdateRelations(b);
             }
-            if (true) {
-                Point canvasRelativePosition = e.GetPosition(mainWindow.Canv);
+            Point canvasRelativePosition = e.GetPosition(mainWindow.Canv);
 
-                if (Keyboard.IsKeyDown(Key.H)) {
-                    b.Margin =
-                        new Thickness(canvasRelativePosition.X - 23, b.Margin.Top, 0, 0);
-                    //TODO ADD HORIZONTAL LINE
-                }
-                else if (Keyboard.IsKeyDown(Key.V)) {
-                    b.Margin =
-                        new Thickness(b.Margin.Left, canvasRelativePosition.Y - 23, 0, 0);
-                    //TODO ADD VERTICAL LINE
-                }
-                else {
-                    b.Margin =
-                        new Thickness(canvasRelativePosition.X - 23, canvasRelativePosition.Y - 23, 0, 0);
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                bool horizontal = Keyboard.IsKeyDown(Key.H);
+                bool vertical = Keyboard.IsKeyDown(Key.V);
 
-
+                var margin = b.Margin;
+                if (horizontal || !vertical)
+                {
+                    margin.Left = buttonRelativePosition.X + margin.Left - ItemRelativePosition.X;
                 }
+                if (vertical || !horizontal)
+                {
+                    margin.Top = buttonRelativePosition.Y + margin.Top - ItemRelativePosition.Y;
+                }
+
+                b.Margin = margin;
             }
 
 
@@ -301,12 +300,14 @@ namespace Graph.Controllers {
                     }
             }
         }
+
         private void VertexRightClick(object sender, MouseButtonEventArgs e) {
             IsDragging = false;
 
         }
         private void VertexLeftClickDown(object sender, MouseButtonEventArgs e) {
             //is connection started
+
 
             if (StartButton == (Button)sender && didStart == true) {
                 MessageBox.Show("You can't link a button to itself!", "Alert",
