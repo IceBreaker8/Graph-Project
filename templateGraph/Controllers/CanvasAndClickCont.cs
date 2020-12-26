@@ -255,20 +255,24 @@ namespace Graph.Controllers {
             if (MainWindow.Relations.Count != 0) {
                 UpdateRelations(b);
             }
-            Point canvasRelativePosition = e.GetPosition(mainWindow.Canv);
+            Point buttonRelativePosition = e.GetPosition(b);
 
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                bool horizontal = Keyboard.IsKeyDown(Key.H);
+                bool vertical = Keyboard.IsKeyDown(Key.V);
 
-            if (Keyboard.IsKeyDown(Key.H)) {
-                b.Margin =
-                    new Thickness(canvasRelativePosition.X - 23, b.Margin.Top, 0, 0);
-            }
-            else if (Keyboard.IsKeyDown(Key.V)) {
-                b.Margin =
-                    new Thickness(b.Margin.Left, canvasRelativePosition.Y - 23, 0, 0);
-            }
-            else {
-                b.Margin =
-                    new Thickness(canvasRelativePosition.X - 23, canvasRelativePosition.Y - 23, 0, 0);
+                var margin = b.Margin;
+                if (horizontal || !vertical)
+                {
+                    margin.Left = buttonRelativePosition.X + margin.Left - ItemRelativePosition.X;
+                }
+                if (vertical || !horizontal)
+                {
+                    margin.Top = buttonRelativePosition.Y + margin.Top - ItemRelativePosition.Y;
+                }
+
+                b.Margin = margin;
             }
 
             foreach (Button button in mainWindow.Vertices) {
@@ -291,12 +295,14 @@ namespace Graph.Controllers {
                     }
             }
         }
+
         private void VertexRightClick(object sender, MouseButtonEventArgs e) {
             IsDragging = false;
 
         }
         private void VertexLeftClickDown(object sender, MouseButtonEventArgs e) {
             //is connection started
+
 
             if (StartButton == (Button)sender && didStart == true) {
                 MessageBox.Show("You can't link a button to itself!", "Alert",
