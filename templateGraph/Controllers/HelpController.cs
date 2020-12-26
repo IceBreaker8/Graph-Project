@@ -50,7 +50,14 @@ namespace Graph.Controllers {
 
         }
         private void TutorialRedirect(object sender, RoutedEventArgs e) {
-            System.Diagnostics.Process.Start("http://graphice.me/#tutorial");
+            try {
+                System.Diagnostics.Process.Start("http://graphice.me/#tutorial");
+
+            }
+            catch (Exception) {
+                MessageBox.Show("Connection error", "Notice",
+                        MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
 
 
         }

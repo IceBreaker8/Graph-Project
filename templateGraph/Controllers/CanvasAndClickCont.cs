@@ -8,6 +8,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using templateGraph;
 using Graph.Utils;
+using System.Threading.Tasks;
 
 namespace Graph.Controllers {
     class CanvasAndClickCont {
@@ -36,7 +37,7 @@ namespace Graph.Controllers {
             Creation.Click += CreateButtonMenu;
             CancelAlgo.Click += AlgoCancel;
             mainWindow.Canv.MouseRightButtonDown += CanvMouseRightButtonUp;
-           
+
         }
 
         public void ClearCanvasColor() {
@@ -248,28 +249,37 @@ namespace Graph.Controllers {
 
         }
         
+
         private void VertexMouseDrag(object sender, MouseEventArgs e) {
+
             if (!IsDragging)
                 return;
             Button b = (Button)sender;
             if (MainWindow.Relations.Count != 0) {
                 UpdateRelations(b);
             }
-            Point canvasRelativePosition = e.GetPosition(mainWindow.Canv);
+            if (true) {
+                Point canvasRelativePosition = e.GetPosition(mainWindow.Canv);
+
+                if (Keyboard.IsKeyDown(Key.H)) {
+                    b.Margin =
+                        new Thickness(canvasRelativePosition.X - 23, b.Margin.Top, 0, 0);
+                    //TODO ADD HORIZONTAL LINE
+                }
+                else if (Keyboard.IsKeyDown(Key.V)) {
+                    b.Margin =
+                        new Thickness(b.Margin.Left, canvasRelativePosition.Y - 23, 0, 0);
+                    //TODO ADD VERTICAL LINE
+                }
+                else {
+                    b.Margin =
+                        new Thickness(canvasRelativePosition.X - 23, canvasRelativePosition.Y - 23, 0, 0);
 
 
-            if (Keyboard.IsKeyDown(Key.H)) {
-                b.Margin =
-                    new Thickness(canvasRelativePosition.X - 23, b.Margin.Top, 0, 0);
+                }
             }
-            else if (Keyboard.IsKeyDown(Key.V)) {
-                b.Margin =
-                    new Thickness(b.Margin.Left, canvasRelativePosition.Y - 23, 0, 0);
-            }
-            else {
-                b.Margin =
-                    new Thickness(canvasRelativePosition.X - 23, canvasRelativePosition.Y - 23, 0, 0);
-            }
+
+
 
             foreach (Button button in mainWindow.Vertices) {
                 if (CanvasAndClickCont.butDict.ContainsKey(button))
@@ -277,7 +287,7 @@ namespace Graph.Controllers {
 
             }
         }
-        
+
         public void UpdateRelations(Button b) {
             foreach (Relation r in MainWindow.Relations) {
                 if (r.ConStart == b || r.ConEnd == b)
@@ -361,13 +371,16 @@ namespace Graph.Controllers {
                     }
                 }
             }
-
+            
             IsDragging = true;
             draggedItem = (Button)sender;
             ItemRelativePosition = e.GetPosition(draggedItem);
-
+            
+            
 
         }
+
+        
         private bool CheckIfRelationExists(Button begin, Button end) {
 
             foreach (Relation R in MainWindow.Relations) {
