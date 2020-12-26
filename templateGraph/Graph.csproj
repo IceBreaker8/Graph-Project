@@ -114,6 +114,7 @@
     <Compile Include="Controllers\AlgoController.cs" />
     <Compile Include="Controllers\ButtonController.cs" />
     <Compile Include="Controllers\CanvasAndClickCont.cs" />
+    <Compile Include="Controllers\DashedLine.cs" />
     <Compile Include="Controllers\FileController.cs" />
     <Compile Include="Controllers\HelpController.cs" />
     <Compile Include="Controllers\OrdonAlgorithm.cs" />
@@ -136,6 +137,7 @@
     <Compile Include="Updater\UpdateChecker.cs" />
     <Compile Include="Updater\UpdateWindow.cs" />
     <Compile Include="Utils\AlgoModeManager.cs" />
+    <Compile Include="Utils\DashLine.cs" />
     <Compile Include="Utils\GridDisplay.cs" />
     <Compile Include="VertexConnections\Relation.cs" />
     <Compile Include="VertexConnections\VertexRank.cs" />

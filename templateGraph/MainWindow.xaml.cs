@@ -25,7 +25,11 @@ namespace templateGraph {
         public MainWindow() {
 
             InitializeComponent();
-            
+
+            //test dashed line
+            new DashLine(this);
+
+
 
             //check for updates
             new UpdateChecker().CheckForUpdate(false);

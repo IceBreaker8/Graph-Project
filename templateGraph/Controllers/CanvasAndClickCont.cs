@@ -212,7 +212,9 @@ namespace Graph.Controllers {
             }
         }
         private void VertexMouseLeftClickUp(object sender, MouseButtonEventArgs e) {
-
+            if (l != null) {
+                l.RemoveDashedLine();
+            }
             if (!IsDragging)
                 return;
 
@@ -248,10 +250,12 @@ namespace Graph.Controllers {
             IsDragging = false;
 
         }
-        
 
+        DashLine l;
         private void VertexMouseDrag(object sender, MouseEventArgs e) {
-
+            if (l != null) {
+                l.RemoveDashedLine();
+            }
             if (!IsDragging)
                 return;
             Button b = (Button)sender;
@@ -260,19 +264,53 @@ namespace Graph.Controllers {
             }
             Point buttonRelativePosition = e.GetPosition(b);
 
-            if (e.LeftButton == MouseButtonState.Pressed)
-            {
+            if (e.LeftButton == MouseButtonState.Pressed) {
                 bool horizontal = Keyboard.IsKeyDown(Key.H);
                 bool vertical = Keyboard.IsKeyDown(Key.V);
 
                 var margin = b.Margin;
-                if (horizontal || !vertical)
-                {
+                if (horizontal || !vertical) {
                     margin.Left = buttonRelativePosition.X + margin.Left - ItemRelativePosition.X;
+                    if (horizontal) {
+                        l = new DashLine(mainWindow);
+                        if (l != null) {
+                            Point relativePoint = b.TransformToAncestor(mainWindow)
+                                  .Transform(new Point(0, 0));
+
+                            Point start = new Point(0, b.Margin.Top + 23);
+                            Point finish = new Point(b.Margin.Left, b.Margin.Top + 23);
+
+                            Point begin = new Point(b.Margin.Left + 50, b.Margin.Top + 23);
+                            Point end = new Point(b.Margin.Left + 2000, b.Margin.Top + 23);
+
+
+                            l.DrawDashedLine(finish, start, end, begin);
+                        }
+                    }
+
+
+
+
                 }
-                if (vertical || !horizontal)
-                {
+                if (vertical || !horizontal) {
                     margin.Top = buttonRelativePosition.Y + margin.Top - ItemRelativePosition.Y;
+                    if (vertical) {
+                        l = new DashLine(mainWindow);
+                        if (l != null) {
+                            Point relativePoint = b.TransformToAncestor(mainWindow)
+                                  .Transform(new Point(0, 0));
+
+                            Point start = new Point(b.Margin.Left + 25, 0);
+                            Point finish = new Point(b.Margin.Left + 25, b.Margin.Top);
+
+                            Point begin = new Point(b.Margin.Left + 25, b.Margin.Top + 50);
+                            Point end = new Point(b.Margin.Left + 23, b.Margin.Top + 2000);
+
+
+                            l.DrawDashedLine(finish, start, end, begin);
+                        }
+
+                    }
                 }
 
                 b.Margin = margin;
@@ -286,6 +324,8 @@ namespace Graph.Controllers {
 
             }
         }
+
+
 
         public void UpdateRelations(Button b) {
             foreach (Relation r in MainWindow.Relations) {
@@ -372,16 +412,16 @@ namespace Graph.Controllers {
                     }
                 }
             }
-            
+
             IsDragging = true;
             draggedItem = (Button)sender;
             ItemRelativePosition = e.GetPosition(draggedItem);
-            
-            
+
+
 
         }
 
-        
+
         private bool CheckIfRelationExists(Button begin, Button end) {
 
             foreach (Relation R in MainWindow.Relations) {
