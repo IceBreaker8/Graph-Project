@@ -258,7 +258,7 @@ namespace Graph.Controllers {
             if (MainWindow.Relations.Count != 0) {
                 UpdateRelations(b);
             }
-            Point canvasRelativePosition = e.GetPosition(mainWindow.Canv);
+            Point buttonRelativePosition = e.GetPosition(b);
 
             if (e.LeftButton == MouseButtonState.Pressed)
             {
