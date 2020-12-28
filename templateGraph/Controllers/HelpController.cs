@@ -15,6 +15,7 @@ namespace Graph.Controllers {
         private MenuItem Update;
         private MenuItem Tutorial;
         private MenuItem Report;
+        private MenuItem PatchNotes;
 
         //email address
         private string emailAddress = "graphice.company@gmail.com";
@@ -25,7 +26,7 @@ namespace Graph.Controllers {
                 Update = mainWindow.FindName("Update") as MenuItem;
                 Tutorial = mainWindow.FindName("Tutorial") as MenuItem;
                 Report = mainWindow.FindName("Report") as MenuItem;
-
+                PatchNotes = mainWindow.FindName("Patch") as MenuItem;
 
             }
             catch (Exception e) {
@@ -39,9 +40,22 @@ namespace Graph.Controllers {
             Update.Click += CheckForUpdate;
             Tutorial.Click += TutorialRedirect;
             Report.Click += ReportRedirect;
+            PatchNotes.Click += Patching;
+        }
+        private void Patching(object sender, RoutedEventArgs e) {
+
+            try {
+                System.Diagnostics.Process.Start("http://graphice.me/#updates");
+
+            }
+            catch (Exception) {
+                MessageBox.Show("Connection error!", "Notice",
+                        MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+
         }
 
-        private void CheckForUpdate(object sender, RoutedEventArgs e) {
+            private void CheckForUpdate(object sender, RoutedEventArgs e) {
             if (new UpdateChecker().CheckForUpdate(true) == false) {
                 MessageBox.Show("You are running the latest GraphICE version " + UpdateChecker.version, "Notice",
                     MessageBoxButton.OK, MessageBoxImage.Information);
@@ -55,7 +69,7 @@ namespace Graph.Controllers {
 
             }
             catch (Exception) {
-                MessageBox.Show("Connection error", "Notice",
+                MessageBox.Show("Connection error!", "Notice",
                         MessageBoxButton.OK, MessageBoxImage.Warning);
             }
 

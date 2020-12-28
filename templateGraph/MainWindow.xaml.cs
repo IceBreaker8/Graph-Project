@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Net;
-using System.Net.Mail;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 using System.Windows.Media;
 using Graph.Controllers;
 using Graph.Controllers.AlgorithmController;
@@ -20,19 +19,20 @@ namespace templateGraph {
         public List<Button> Vertices = new List<Button>();
         public static List<Relation> Relations = new List<Relation>();
 
-       
+
 
         public MainWindow() {
 
             InitializeComponent();
 
-            //test dashed line
-            new DashLine(this);
+            
+            try {
+                new UpdateChecker().CheckForUpdate(false);
+            }
+            catch (Exception e) {
+                MessageBox.Show(e.Message);
+            }
 
-
-
-            //check for updates
-            new UpdateChecker().CheckForUpdate(false);
 
             //centering window
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;

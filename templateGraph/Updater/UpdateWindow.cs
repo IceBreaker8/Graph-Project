@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,7 +9,7 @@ using System.Windows;
 namespace Graph.Updater {
     class UpdateWindow {
 
-        private string downloadLink = "http://graphice.me/#downloads";
+        
         private short DelayTime = 1;
         public UpdateWindow(bool verif) {
             if (verif)
@@ -26,7 +27,12 @@ namespace Graph.Updater {
                     , MessageBoxButton.YesNo, MessageBoxImage.Information);
                 if (result == MessageBoxResult.Yes) {
                     //redirect link
-                    System.Diagnostics.Process.Start(downloadLink);
+                    new UpdateDownloader();
+                    System.Windows.Application.Current.Shutdown();
+                    Process.GetCurrentProcess().Kill();
+                    
+                    
+                    // close app
                 }
                 else if (result == MessageBoxResult.No) {
                     //cancel

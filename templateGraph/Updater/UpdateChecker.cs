@@ -13,12 +13,13 @@ namespace Graph.Updater {
     public class UpdateChecker {
 
         public static string version = "0.0.1";
-
+        public static string VersionLink = "https://raw.githubusercontent.com/IceBreaker8" +
+            "/graphICE-website/main/version.JSON?token=AOISHLE2YQI3NT2ZFS53UXK75MLQO";
 
         public bool CheckForUpdate(bool verif) {
             try {
                 var json = new WebClient().
-                    DownloadString("https://raw.githubusercontent.com/IceBreaker8/graphICE-website/main/version.JSON?token=AOISHLE2YQI3NT2ZFS53UXK75MLQO");
+                    DownloadString(VersionLink);
                 var JSONObj = new JavaScriptSerializer().Deserialize<Dictionary<string, string>>(json);
 
 

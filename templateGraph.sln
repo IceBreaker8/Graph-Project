@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.29806.167
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Graph", "templateGraph\Graph.csproj", "{87942269-A9F6-4DE9-8352-65D11C6C75CB}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "GraphICE_Setup", "GraphICE_Setup\GraphICE_Setup.vdproj", "{AEDA6B56-D5EA-4139-A358-CF4F459000DD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Updater", "Updater\Updater.csproj", "{87CA3A5A-DDA8-4ABE-92D4-BD5631D7A43F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,12 @@ Global
 		{87942269-A9F6-4DE9-8352-65D11C6C75CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{87942269-A9F6-4DE9-8352-65D11C6C75CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{87942269-A9F6-4DE9-8352-65D11C6C75CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AEDA6B56-D5EA-4139-A358-CF4F459000DD}.Debug|Any CPU.ActiveCfg = Debug
+		{AEDA6B56-D5EA-4139-A358-CF4F459000DD}.Release|Any CPU.ActiveCfg = Release
+		{87CA3A5A-DDA8-4ABE-92D4-BD5631D7A43F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87CA3A5A-DDA8-4ABE-92D4-BD5631D7A43F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87CA3A5A-DDA8-4ABE-92D4-BD5631D7A43F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87CA3A5A-DDA8-4ABE-92D4-BD5631D7A43F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
