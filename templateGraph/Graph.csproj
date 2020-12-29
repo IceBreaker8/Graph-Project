@@ -120,7 +120,6 @@
     <Compile Include="Controllers\AlgoController.cs" />
     <Compile Include="Controllers\ButtonController.cs" />
     <Compile Include="Controllers\CanvasAndClickCont.cs" />
-    <Compile Include="Controllers\DashedLine.cs" />
     <Compile Include="Controllers\FileController.cs" />
     <Compile Include="Controllers\HelpController.cs" />
     <Compile Include="Controllers\OrdonAlgorithm.cs" />
@@ -146,6 +145,9 @@
     <Compile Include="Utils\AlgoModeManager.cs" />
     <Compile Include="Utils\DashLine.cs" />
     <Compile Include="Utils\GridDisplay.cs" />
+    <Compile Include="Utils\Window1.xaml.cs">
+      <DependentUpon>Window1.xaml</DependentUpon>
+    </Compile>
     <Compile Include="VertexConnections\Relation.cs" />
     <Compile Include="VertexConnections\VertexRank.cs" />
     <Compile Include="Vertex\VertexPosManager.cs" />
@@ -190,6 +192,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Utils\Window1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">

@@ -19,7 +19,7 @@ namespace templateGraph {
         public List<Button> Vertices = new List<Button>();
         public static List<Relation> Relations = new List<Relation>();
 
-
+        
 
         public MainWindow() {
 
@@ -45,6 +45,8 @@ namespace templateGraph {
             new CanvasAndClickCont(this, false);
             new OrdonAlgorithm(this);
         }
+        
+
 
         public void AlgoAftermath() {
             if (AlgoController.AlgoStart != null) {

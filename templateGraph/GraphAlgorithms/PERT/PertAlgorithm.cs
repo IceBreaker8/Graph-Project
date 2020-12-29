@@ -223,37 +223,28 @@ namespace Graph.GraphAlgorithms.PERT {
         }
 
         public bool IfOnlyOneStart() {
-            int counter = 0;
-            foreach (Button button in Ranks.Keys) {
-                if (Ranks[button] == 0) {
-                    counter++;
+            int count = 0;
+            foreach (Button b in mainWindow.Vertices) {
+                if (GetPred(b).Count == 0) {
+                    count++;
                 }
             }
-            if (counter == 1)
-                return true;
-            return false;
+
+            return count == 1 ? true : false;
         }
 
         public bool IfOnlyOneEnd() {
-            //check last rank
-            int maxRank = 0;
-            foreach (Button button in Ranks.Keys) {
-                if (Ranks[button] > maxRank) {
-                    maxRank = Ranks[button];
+            int count = 0;
+            foreach (Button b in mainWindow.Vertices) {
+                if (GetSucc(b).Count == 0) {
+                    count++;
                 }
             }
 
-            //
-            int counter = 0;
-            foreach (Button button in Ranks.Keys) {
-                if (Ranks[button] == maxRank) {
-                    counter++;
-                }
-            }
-            if (counter == 1)
-                return true;
-            return false;
+            return count == 1 ? true : false;
         }
-        
+
+
+
     }
 }

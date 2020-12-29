@@ -12,12 +12,35 @@ using System.Threading.Tasks;
 
 namespace Graph.Controllers {
     class CanvasAndClickCont {
+
         private MainWindow mainWindow;
 
 
         //MenuItems
-        private MenuItem Creation;
-        private MenuItem CancelAlgo;
+        public static MenuItem Creation;
+        public static MenuItem CancelAlgo;
+
+        public static Dictionary<Button, VertexTupleBox> butDict =
+            new Dictionary<Button, VertexTupleBox>();
+        /* =================================== Button events ================================================ */
+        public static Button StartButton;
+        //button
+        public static int maxButtonNameLength = 6;
+        //other
+        public static Control draggedItem;
+        public static Point ItemRelativePosition;
+        public static bool IsDragging;
+        public static Point CreationCoords; // button creation coords
+
+        public static bool didStart = false;
+        public static Button VertexMenuButton;
+        //Menus
+        public static ContextMenu CanvMenu;
+        public static ContextMenu VertexMenu;
+
+
+        public static Relation firstRelation;
+
         public CanvasAndClickCont(MainWindow mainWindow, bool pass) {
 
             this.mainWindow = mainWindow;
@@ -126,26 +149,7 @@ namespace Graph.Controllers {
         }
 
 
-        public static Dictionary<Button, VertexTupleBox> butDict =
-            new Dictionary<Button, VertexTupleBox>();
-        /* =================================== Button events ================================================ */
-        public Button StartButton;
-        //button
-        private int maxButtonNameLength = 6;
-        //other
-        private Control draggedItem;
-        private Point ItemRelativePosition;
-        private bool IsDragging;
-        private Point CreationCoords; // button creation coords
-
-        public static bool didStart = false;
-        public static Button VertexMenuButton;
-        //Menus
-        public static ContextMenu CanvMenu;
-        public static ContextMenu VertexMenu;
-
-
-        private Relation firstRelation;
+        
 
         enum Mode {
             auto,
@@ -225,6 +229,12 @@ namespace Graph.Controllers {
             return mainWindow.Vertices.Count * (mainWindow.Vertices.Count - 1);
         }
         private void VertexMouseLeftDoubleClick(object sender, RoutedEventArgs e) {
+
+            if (AlgoController.algorunning || AlgoController.AlgoStarted) {
+                MessageBox.Show("You can't link while an algorithm is running!", "Alert",
+                        MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
             if (mainWindow.Vertices.Count < 2 || GetMaxCon() == MainWindow.Relations.Count) {
                 MessageBox.Show("There are no other button to link to!", "Alert",
                     MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -251,7 +261,7 @@ namespace Graph.Controllers {
 
         }
 
-        DashLine l;
+        public static DashLine l;
         private void VertexMouseDrag(object sender, MouseEventArgs e) {
             if (l != null) {
                 l.RemoveDashedLine();

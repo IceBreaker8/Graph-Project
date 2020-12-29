@@ -1,4 +1,5 @@
 ﻿using Graph.Updater;
+using Graph.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,7 @@ namespace Graph.Controllers {
         private MenuItem Tutorial;
         private MenuItem Report;
         private MenuItem PatchNotes;
+        private MenuItem About;
 
         //email address
         private string emailAddress = "graphice.company@gmail.com";
@@ -27,7 +29,7 @@ namespace Graph.Controllers {
                 Tutorial = mainWindow.FindName("Tutorial") as MenuItem;
                 Report = mainWindow.FindName("Report") as MenuItem;
                 PatchNotes = mainWindow.FindName("Patch") as MenuItem;
-
+                About = mainWindow.FindName("About") as MenuItem;
             }
             catch (Exception e) {
                 MessageBox.Show(e.Message);
@@ -41,6 +43,13 @@ namespace Graph.Controllers {
             Tutorial.Click += TutorialRedirect;
             Report.Click += ReportRedirect;
             PatchNotes.Click += Patching;
+            About.Click += Abouting;
+        }
+
+
+        private void Abouting(object sender, RoutedEventArgs e) {
+            Window1 w = new Window1();
+            w.Show();
         }
         private void Patching(object sender, RoutedEventArgs e) {
 
@@ -55,7 +64,7 @@ namespace Graph.Controllers {
 
         }
 
-            private void CheckForUpdate(object sender, RoutedEventArgs e) {
+        private void CheckForUpdate(object sender, RoutedEventArgs e) {
             if (new UpdateChecker().CheckForUpdate(true) == false) {
                 MessageBox.Show("You are running the latest GraphICE version " + UpdateChecker.version, "Notice",
                     MessageBoxButton.OK, MessageBoxImage.Information);

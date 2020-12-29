@@ -12,9 +12,8 @@ namespace Graph.Updater {
 
     public class UpdateChecker {
 
-        public static string version = "0.0.1";
-        public static string VersionLink = "https://raw.githubusercontent.com/IceBreaker8" +
-            "/graphICE-website/main/version.JSON?token=AOISHLE2YQI3NT2ZFS53UXK75MLQO";
+        public static string version = "0.0.6";
+        public static string VersionLink = "http://graphice.me/version.JSON";
 
         public bool CheckForUpdate(bool verif) {
             try {
