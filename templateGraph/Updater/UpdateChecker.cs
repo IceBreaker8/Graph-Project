@@ -14,7 +14,7 @@ namespace Graph.Updater {
 
         public static string version = "0.0.0.12";
         public static string VersionLink = "http://graphice.me/version.JSON";
-        private int s = 0;
+        
         public bool CheckForUpdate(bool verif) {
             try {
                 var json = new WebClient().
