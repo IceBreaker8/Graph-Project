@@ -12,22 +12,28 @@ namespace Graph.Updater {
 
     public class UpdateChecker {
 
-        public static string version = "0.0.0.12";
+        public static string version = "0.0.0.13";
         public static string VersionLink = "http://graphice.me/version.JSON";
-        
+
         public bool CheckForUpdate(bool verif) {
             try {
-                var json = new WebClient().
-                    DownloadString(VersionLink);
-               
-                var JSONObj = new JavaScriptSerializer().Deserialize<Dictionary<string, string>>(json);
+
+                using (var web = new WebClient()) {
+
+                    var json = web.
+                        DownloadString(VersionLink);
+                    var JSONObj = new JavaScriptSerializer().Deserialize<Dictionary<string, string>>(json);
 
 
-                string currentVersion = JSONObj["version"];
-                if (currentVersion != version) { // need to update 
-                    new UpdateWindow(verif);
-                    return true;
+                    string currentVersion = JSONObj["version"];
+                    if (currentVersion != version) { // need to update 
+                        new UpdateWindow(verif);
+                        return true;
+                    }
                 }
+
+
+
             }
             catch (Exception) {
                 MessageBox.Show("Connection error!", "Alert"
