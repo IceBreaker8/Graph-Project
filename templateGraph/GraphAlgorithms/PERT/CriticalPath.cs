@@ -15,7 +15,7 @@ namespace Graph.GraphAlgorithms.PERT {
     class CriticalPath {
         private MainWindow mainWindow;
         //criticalPath color
-        SolidColorBrush color = Brushes.DarkOrange;
+        private SolidColorBrush color = Brushes.DarkOrange;
 
         public CriticalPath(MainWindow mainWindow) {
             this.mainWindow = mainWindow;

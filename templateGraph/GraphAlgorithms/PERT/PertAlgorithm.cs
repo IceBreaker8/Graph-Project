@@ -27,16 +27,16 @@ namespace Graph.GraphAlgorithms.PERT {
                     , MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
+            if (AlgoController.algorunning || AlgoController.AlgoStarted) {
+                MessageBox.Show("You are already running another algorithm!", "Alert"
+                        , MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
             Pert.Clear();
             this.mainWindow = mainWindow;
             VertexRank VR = new VertexRank(mainWindow.Vertices, MainWindow.Relations);
             this.Ranks = VR.Ranks;
 
-
-            //ask user if he wanna sort them first TOOODDDOOOOO
-            //VR.SortVerticesByRanks(ref mainWindow.Vertices);
-            //SetAllVerticesPositions(mainWindow);
-            //
             if (PertRunning) {
                 RemoveAlgorithmBoxes();
             }
