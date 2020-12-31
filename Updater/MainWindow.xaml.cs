@@ -39,7 +39,9 @@ namespace Updater {
 
 
         private void DownloadUpdate() {
-
+            this.Show();
+            Thread.Sleep(800);
+            progressBar.Value = 0;
             try {
 
                 WebClient webClient = new WebClient();
