@@ -62,7 +62,7 @@ namespace Updater {
                     
 
                 };
-                webClient.DownloadFileAsync(new Uri("http://graphice.me/Graph.zip"),
+                webClient.DownloadFileAsync(new Uri("http://graphice.me/graph/25fg3v6xs42c13/Graph.zip"),
                     @".\Graph.zip");
                 webClient.Dispose();
 
