@@ -32,7 +32,9 @@ namespace Graph.Controllers {
 
             }
             catch (Exception e) {
-                MessageBox.Show(e.Message);
+                MessageBox.Show(e.Message, "Alert",
+                    MessageBoxButton.OK, MessageBoxImage.Warning);
+                
             }
             SaveEvents();
 
@@ -90,7 +92,9 @@ namespace Graph.Controllers {
                 }
             }
             catch (Exception e) {
-                MessageBox.Show(e.Message);
+                MessageBox.Show(e.Message, "Alert",
+                    MessageBoxButton.OK, MessageBoxImage.Warning);
+                
             }
 
             mainWindow.UpdateLayout();
@@ -198,7 +202,8 @@ namespace Graph.Controllers {
 
                     DataSaver.WriteToBinaryFile<GraphData>(FileCreator.path, SaveAllGraphData());
                     clearCanvas();
-                    MessageBox.Show("New file created!");
+                    MessageBox.Show("New File Created!",
+                    "Info", MessageBoxButton.OK, MessageBoxImage.Information);
                     FileCreator.path = null;
                     return;
                 }

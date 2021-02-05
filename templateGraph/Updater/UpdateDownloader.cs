@@ -14,10 +14,13 @@ namespace Graph.Updater {
 
         public UpdateDownloader() {
             _ = Hold();
-            Process.Start("Updater.exe");
+            StartUpdate();
             
         }
 
+        private void StartUpdate() {
+            Process.Start("Updater.exe");
+        }
         public async Task Hold() {
             await Task.Delay(1000);
         }

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using templateGraph;
 
 namespace Graph.Updater {
     class UpdateWindow {
@@ -27,12 +28,9 @@ namespace Graph.Updater {
                     , MessageBoxButton.YesNo, MessageBoxImage.Information);
                 if (result == MessageBoxResult.Yes) {
                     //redirect link
-                    new UpdateDownloader();
-                    System.Windows.Application.Current.Shutdown();
-                    Process.GetCurrentProcess().Kill();
-                    
-                    
-                    // close app
+                    UpdateExtractor ue = new UpdateExtractor();
+                    ue.Show();
+                     
                 }
                 else if (result == MessageBoxResult.No) {
                     //cancel
