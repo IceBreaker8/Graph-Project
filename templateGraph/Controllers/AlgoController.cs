@@ -119,10 +119,8 @@ namespace Graph.Controllers.AlgorithmController {
                     MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
-            //
-            //TODO test for negative cycles
-
-            //
+            if (CheckNegativeCycles())
+                return;
             algorunning = true;
             AlgoStarted = true;
             BellmanOnOnce = true;
@@ -142,16 +140,8 @@ namespace Graph.Controllers.AlgorithmController {
                     MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
-            ////TEST NEGATIVE CYCLES
-            //F = new Floyd(Relations, Vertices.Count, Vertices);
-            //if (F.NegCycle()) {
-            //    MessageBox.Show("You can't find a shortest path with the presence of a negative cycle!");
-            //    F = null;
-            //    return;
-            //}
-            //F = null;
-            ////
-            ///
+            if (CheckNegativeCycles())
+                return;
             algorunning = true;
             IsBellmanAmeliorated = true;
             AlgoStarted = true;
@@ -176,18 +166,28 @@ namespace Graph.Controllers.AlgorithmController {
                     MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
-            F = new Floyd(MainWindow.Relations, mainWindow.Vertices.Count, mainWindow.Vertices);
-            if (F.NegCycle()) {
-                MessageBox.Show("You can't find a shortest path with the presence of a negative cycle!", "Alert",
-                    MessageBoxButton.OK, MessageBoxImage.Warning);
-                F = null;
+
+            if (CheckNegativeCycles())
                 return;
-            }
+           
+            F = new Floyd(MainWindow.Relations, mainWindow.Vertices.Count, mainWindow.Vertices, false);
+            
             F.Show();
             AlgoStarted = true;
             algorunning = true;
             firstStart = true;
 
+        }
+
+        private bool CheckNegativeCycles() {
+            Floyd fl = new Floyd(MainWindow.Relations, mainWindow.Vertices.Count, mainWindow.Vertices, true);
+            
+            if (fl.NegCycle()) {
+                MessageBox.Show("You can't execute this algorithm with negative cycles!", "Alert",
+                   MessageBoxButton.OK, MessageBoxImage.Warning);
+                return true;
+            }
+            return false;
         }
 
         private void VertexEndTrigger(object sender, RoutedEventArgs e) {

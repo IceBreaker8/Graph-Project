@@ -20,15 +20,28 @@ namespace templateGraph.GraphAlgorithms {
     public partial class Floyd : Window {
 
         List<Relation> relations = new List<Relation>();
-
-        public Floyd(List<Relation> relations, int size, List<Button> buttons) {
+        private bool checkCyclesOnly = false;
+        public Floyd(List<Relation> relations, int size, List<Button> buttons, bool checkCyclesOnly) {
             InitializeComponent();
+            this.checkCyclesOnly = checkCyclesOnly;
+            if (checkCyclesOnly)
+                HideWindow();
             gridHeight = 0;
             InitFloyd(relations, size, buttons);
             this.relations = relations;
 
 
         }
+
+        public void HideWindow() {
+            this.Visibility = Visibility.Hidden;
+            this.Width = 0;
+            this.Height = 0;
+            WindowStyle = WindowStyle.None;
+            ShowInTaskbar = false;
+            ShowActivated = false;
+        }
+
 
 
         public String[,] distance;
@@ -102,8 +115,7 @@ namespace templateGraph.GraphAlgorithms {
 
                     if (distance[i, j] == "INF") {
                         P[i, j] = "0";
-                    }
-                    else {
+                    } else {
                         P[i, j] = buttons[i - 1].Content.ToString();
                     }
                 }
@@ -134,11 +146,9 @@ namespace templateGraph.GraphAlgorithms {
                 for (int j = 0; j < size + 1; j++) {
                     if (i == 0 || j == 0) {
                         to.AddCell(i, j, new Run(distance[i, j] + "") { FontWeight = FontWeights.Bold }, null);
-                    }
-                    else if (intDistance[i, j] == INF) {
+                    } else if (intDistance[i, j] == INF) {
                         to.AddCell(i, j, new Run("INF"), null);
-                    }
-                    else {
+                    } else {
                         to.AddCell(i, j, new Run(intDistance[i, j] + ""), null);
                     }
                 }
@@ -149,12 +159,15 @@ namespace templateGraph.GraphAlgorithms {
             Canvas.SetTop(g, gridHeight);
             canv.Children.Add(g);
             if (!IsCalculated) {
-                this.Show();
-                WidthToSize = g.ActualWidth;
-                canv.Width = WidthToSize * 2 + 200;
-                this.Width = WidthToSize * 2 + 300;
-                IsCalculated = true;
-                CenterWindowOnScreen();
+                if (!checkCyclesOnly) {
+                    this.Show();
+                    WidthToSize = g.ActualWidth;
+                    canv.Width = WidthToSize * 2 + 200;
+                    this.Width = WidthToSize * 2 + 300;
+                    IsCalculated = true;
+                    CenterWindowOnScreen();
+                }
+                
             }
 
 
@@ -171,8 +184,7 @@ namespace templateGraph.GraphAlgorithms {
                     if (i == 0 || j == 0) {
                         to.AddCell(i, j, new Run(P[i, j] + "") { FontWeight = FontWeights.Bold }, null);
 
-                    }
-                    else {
+                    } else {
                         to.AddCell(i, j, new Run(P[i, j] + ""), null);
                     }
 
@@ -184,7 +196,7 @@ namespace templateGraph.GraphAlgorithms {
             Canvas.SetTop(g, gridHeight);
             canv.Children.Add(g);
 
-            
+
 
             Canvas.SetLeft(g, WidthToSize + 100);
 
