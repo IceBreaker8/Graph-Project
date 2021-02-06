@@ -128,8 +128,8 @@
     <Compile Include="GraphAlgorithms\ShortestPath\Bellman.xaml.cs">
       <DependentUpon>Bellman.xaml</DependentUpon>
     </Compile>
-    <Compile Include="GraphAlgorithms\ShortestPath\Dijktra.xaml.cs">
-      <DependentUpon>Dijktra.xaml</DependentUpon>
+    <Compile Include="GraphAlgorithms\ShortestPath\Dijkstra.xaml.cs">
+      <DependentUpon>Dijkstra.xaml</DependentUpon>
     </Compile>
     <Compile Include="GraphAlgorithms\PERT\PertAlgorithm.cs" />
     <Compile Include="GraphAlgorithms\PERT\VertexTupleBox.cs" />
@@ -158,7 +158,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="GraphAlgorithms\ShortestPath\Dijktra.xaml">
+    <Page Include="GraphAlgorithms\ShortestPath\Dijkstra.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

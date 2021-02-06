@@ -30,7 +30,7 @@
 
                 <MenuItem Header="Shortest Path Algorithm" >
 
-                    <MenuItem Name="Dijktra" Header="Dijktra"/>
+                    <MenuItem Name="Dijkstra" Header="Dijkstra"/>
                     <MenuItem Name="Bellman" Header="Bellman" />
                     <MenuItem Name="BellmanAme" Header="Ameliorated Bellman" />
                     <MenuItem Name="Floyd" Header="Floyd Warshall"/>

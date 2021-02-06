@@ -25,7 +25,7 @@ namespace Graph.Controllers.AlgorithmController {
 
 
         public static Floyd F;
-        public static Dijktra D;
+        public static Dijkstra D;
         public static Bellman B;
 
         public static bool BellmanOnOnce = false;
@@ -42,13 +42,13 @@ namespace Graph.Controllers.AlgorithmController {
 
         public static bool firstStart = false;
         //MenuItems
-        MenuItem DijktraButton;
+        MenuItem DijkstraButton;
         MenuItem BellmanButton;
         MenuItem FloydButton;
         MenuItem BellmanAmeButton;
         public AlgoController(MainWindow mainWindow) {
             this.mainWindow = mainWindow;
-            DijktraButton = mainWindow.FindName("Dijktra") as MenuItem;
+            DijkstraButton = mainWindow.FindName("Dijkstra") as MenuItem;
             BellmanButton = mainWindow.FindName("Bellman") as MenuItem;
             BellmanAmeButton = mainWindow.FindName("BellmanAme") as MenuItem;
             FloydButton = mainWindow.FindName("Floyd") as MenuItem;
@@ -56,7 +56,7 @@ namespace Graph.Controllers.AlgorithmController {
         }
 
         private void SaveEvents() {
-            DijktraButton.Click += Dijktra;
+            DijkstraButton.Click += Dijktra;
             BellmanAmeButton.Click += AmelioratedBellman;
             BellmanButton.Click += Bellman;
             FloydButton.Click += Floyd;

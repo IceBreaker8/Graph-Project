@@ -181,7 +181,7 @@ namespace Graph.Controllers {
                 AlgoController.AlgoStart.Background = Brushes.Green;
                 AlgoController.AlgoStart.Foreground = Brushes.White;
                 //algo
-                AlgoController.D = new Dijktra(MainWindow.Relations, mainWindow.Vertices.Count,
+                AlgoController.D = new Dijkstra(MainWindow.Relations, mainWindow.Vertices.Count,
                     mainWindow.Vertices, AlgoController.AlgoStart);
                 AlgoController.D.Show();
 

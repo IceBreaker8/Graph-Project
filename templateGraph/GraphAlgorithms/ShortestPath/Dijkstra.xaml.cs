@@ -18,7 +18,7 @@ namespace Graph.GraphAlgorithms {
     /// <summary>
     /// Interaction logic for Dijktra.xaml
     /// </summary>
-    public partial class Dijktra : Window {
+    public partial class Dijkstra : Window {
 
         List<Relation> relations = new List<Relation>();
         List<Button> buttons = new List<Button>();
@@ -28,7 +28,7 @@ namespace Graph.GraphAlgorithms {
         public double canvHeight;
         public double canvWidth;
 
-        public Dijktra(List<Relation> relations, int size, List<Button> buttons, Button AlgoStart) {
+        public Dijkstra(List<Relation> relations, int size, List<Button> buttons, Button AlgoStart) {
             InitializeComponent();
 
             this.relations = relations;
