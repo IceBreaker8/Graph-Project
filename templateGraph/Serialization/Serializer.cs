@@ -43,9 +43,10 @@ namespace Graph.Utils {
                     return (T)binaryFormatter.Deserialize(stream);
                 }
             }
-            catch (Exception e) {
-                MessageBox.Show("You can only load graph files!");
-                Console.Write(e.Message);
+            catch (Exception) {
+                MessageBox.Show("You can't load a non graph file!", "Alert",
+                    MessageBoxButton.OK, MessageBoxImage.Warning);
+                
                 return default(T);
             }
             

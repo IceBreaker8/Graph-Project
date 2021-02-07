@@ -64,9 +64,6 @@ namespace Graph.Serialization {
         }
 
 
-        public void printMessage() {
-
-        }
 
 
     }

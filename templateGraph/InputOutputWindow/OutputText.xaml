@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:templateGraph.InputOutputWindow"
         mc:Ignorable="d"
-        Title="OutputText" Height="450" Width="800"
+        Title="OutputBox" Height="450" Width="800"
         >
     <Grid>
         <TextBlock x:Name="TextB" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" Height="414" Width="780"/>

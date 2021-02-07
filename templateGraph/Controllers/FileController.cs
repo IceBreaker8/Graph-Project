@@ -30,11 +30,10 @@ namespace Graph.Controllers {
                 Save = mainWindow.FindName("Save") as MenuItem;
                 Exit = mainWindow.FindName("Exit") as MenuItem;
 
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 MessageBox.Show(e.Message, "Alert",
                     MessageBoxButton.OK, MessageBoxImage.Warning);
-                
+
             }
             SaveEvents();
 
@@ -47,7 +46,7 @@ namespace Graph.Controllers {
             Exit.Click += Exit_Click;
             mainWindow.Closing += Window_Closing;
             mainWindow.KeyDown += Save_KeyDown;
-            
+
         }
 
         private void Exit_Click(object sender, RoutedEventArgs e) {
@@ -90,11 +89,10 @@ namespace Graph.Controllers {
                     c.CreateButton(new Point(b.Value.a, b.Value.b), b.Key);
 
                 }
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 MessageBox.Show(e.Message, "Alert",
                     MessageBoxButton.OK, MessageBoxImage.Warning);
-                
+
             }
 
             mainWindow.UpdateLayout();
@@ -102,7 +100,7 @@ namespace Graph.Controllers {
             List<List<string>> listToLoad = objectToRead.getMyList();
 
             foreach (var list in listToLoad) {
-                
+
                 Relation relation = new Relation(getButtonByName(list[0]));
                 MainWindow.Relations.Add(relation);
 
@@ -130,11 +128,9 @@ namespace Graph.Controllers {
         private void Save_KeyDown(object sender, KeyEventArgs e) {
             if (Keyboard.Modifiers == ModifierKeys.Control && e.Key == Key.S) {
                 SaveData();
-            }
-            else if (Keyboard.Modifiers == ModifierKeys.Control && e.Key == Key.O) {
+            } else if (Keyboard.Modifiers == ModifierKeys.Control && e.Key == Key.O) {
                 OpenData();
-            }
-            else if (Keyboard.Modifiers == ModifierKeys.Control && e.Key == Key.N) {
+            } else if (Keyboard.Modifiers == ModifierKeys.Control && e.Key == Key.N) {
                 NewData();
             }
         }
@@ -163,19 +159,28 @@ namespace Graph.Controllers {
             }
         }
         private void OpenData() {
-
+            string copy = null;
             if (AlgoController.AlgoStarted || AlgoController.algorunning) {
                 MessageBox.Show("You can't load a file while an algorithm is running!", "Alert",
                     MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
-
+            if (FileCreator.path != null) {
+                copy = FileCreator.path;
+            }
             FileCreator.LoadFile();
             if (FileCreator.path != null) {
-                clearCanvas();
+
                 GraphData objectToRead = DataSaver.ReadFromBinaryFile<GraphData>(FileCreator.path);
-                if (objectToRead != null)
+                if (objectToRead != null) {
+                    clearCanvas();
                     LoadAndSetVertices(objectToRead);
+
+                } else {
+                    if (copy != null)
+                        FileCreator.path = copy;
+                }
+
 
             }
 
@@ -197,8 +202,7 @@ namespace Graph.Controllers {
                     clearCanvas();
                     FileCreator.path = null;
                     return;
-                }
-                else if (r == MessageBoxResult.Yes) {
+                } else if (r == MessageBoxResult.Yes) {
 
                     DataSaver.WriteToBinaryFile<GraphData>(FileCreator.path, SaveAllGraphData());
                     clearCanvas();
@@ -206,8 +210,7 @@ namespace Graph.Controllers {
                     "Info", MessageBoxButton.OK, MessageBoxImage.Information);
                     FileCreator.path = null;
                     return;
-                }
-                else {
+                } else {
 
                     return;
                 }
@@ -223,8 +226,7 @@ namespace Graph.Controllers {
                     MessageBox.Show("New File Created!", "Info",
                     MessageBoxButton.OK, MessageBoxImage.Information);
                     return;
-                }
-                else if (r == MessageBoxResult.Yes) {
+                } else if (r == MessageBoxResult.Yes) {
                     FileCreator.LoadDirAndCreateFile();
 
                     if (FileCreator.path != null) {
@@ -236,8 +238,7 @@ namespace Graph.Controllers {
                         return;
                     }
 
-                }
-                else {
+                } else {
 
                     return;
                 }
@@ -250,13 +251,11 @@ namespace Graph.Controllers {
             if (r == MessageBoxResult.No) {
                 CloseAndCleanApp();
                 return;
-            }
-            else if (r == MessageBoxResult.Yes) {
+            } else if (r == MessageBoxResult.Yes) {
                 SaveData();
                 if (FileCreator.path != null) {
                     CloseAndCleanApp();
-                }
-                else {
+                } else {
 
                 }
                 return;
@@ -284,18 +283,15 @@ namespace Graph.Controllers {
             if (r == MessageBoxResult.No) {
                 CloseAndCleanApp();
                 return;
-            }
-            else if (r == MessageBoxResult.Yes) {
+            } else if (r == MessageBoxResult.Yes) {
                 SaveData();
                 if (FileCreator.path != null) {
                     CloseAndCleanApp();
-                }
-                else {
+                } else {
                     e.Cancel = true;
                 }
                 return;
-            }
-            else if (r == MessageBoxResult.Cancel) {
+            } else if (r == MessageBoxResult.Cancel) {
                 e.Cancel = true;
             }
 
