@@ -65,7 +65,7 @@ namespace Graph.Controllers {
         }
 
         private void CheckForUpdate(object sender, RoutedEventArgs e) {
-            if (new UpdateChecker().CheckForUpdate(true) == false) {
+            if (UpdateChecker.CheckForUpdate(true) == false) {
                 MessageBox.Show("You are running the latest GraphICE version " + UpdateChecker.version, "Notice",
                     MessageBoxButton.OK, MessageBoxImage.Information);
             }

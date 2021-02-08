@@ -19,17 +19,18 @@ namespace templateGraph {
         public List<Button> Vertices = new List<Button>();
         public static List<Relation> Relations = new List<Relation>();
 
-        
+        public static string AppName = "GraphICE";
+        public static MainWindow main;
+
 
         public MainWindow() {
 
             InitializeComponent();
+            main = this;
 
-            
             try {
-                new UpdateChecker().CheckForUpdate(false);
-            }
-            catch (Exception e) {
+                UpdateChecker.CheckForUpdate(false);
+            } catch (Exception e) {
                 MessageBox.Show(e.Message);
             }
 
@@ -45,7 +46,7 @@ namespace templateGraph {
             new CanvasAndClickCont(this, false);
             new OrdonAlgorithm(this);
         }
-        
+
 
 
         public void AlgoAftermath() {

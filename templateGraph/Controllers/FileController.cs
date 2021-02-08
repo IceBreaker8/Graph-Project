@@ -155,6 +155,7 @@ namespace Graph.Controllers {
 
             if (FileCreator.path != null) {
                 DataSaver.WriteToBinaryFile<GraphData>(FileCreator.path, SaveAllGraphData()); //save the data before loading (new save)
+                MainWindow.main.Title = MainWindow.AppName + " - " + FileCreator.path;
                 return;
             }
         }
@@ -175,6 +176,7 @@ namespace Graph.Controllers {
                 if (objectToRead != null) {
                     clearCanvas();
                     LoadAndSetVertices(objectToRead);
+                    MainWindow.main.Title = MainWindow.AppName + " - " + FileCreator.path;
 
                 } else {
 
@@ -199,6 +201,7 @@ namespace Graph.Controllers {
 
                 if (r == MessageBoxResult.No) {
                     //do no stuff
+                    MainWindow.main.Title = MainWindow.AppName;
                     clearCanvas();
                     FileCreator.path = null;
                     return;
@@ -208,13 +211,14 @@ namespace Graph.Controllers {
                     clearCanvas();
                     MessageBox.Show("New File Created!",
                     "Info", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MainWindow.main.Title = MainWindow.AppName;
                     FileCreator.path = null;
                     return;
                 } else {
 
                     return;
                 }
-                //do you wanna save this current file before starting a new one?
+                
             }
             if (mainWindow.Vertices.Count > 0) { //path is null
                 MessageBoxResult r = MessageBox.Show("Do you want to Save before creating new project?",
