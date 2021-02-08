@@ -42,12 +42,12 @@ namespace Graph.Utils {
                     //Get the path of specified file
                     path = openFileDialog.FileName;
 
-                    //Read the contents of the file into a stream
-                    var fileStream = openFileDialog.OpenFile();
+                    ////Read the contents of the file into a stream
+                    //var fileStream = openFileDialog.OpenFile();
 
-                    using (StreamReader reader = new StreamReader(fileStream)) {
-                        //FILE CONTENT HERE TODO
-                    }
+                    //using (StreamReader reader = new StreamReader(fileStream)) {
+                    //    //FILE CONTENT HERE TODO
+                    //}
                 }
             }
         }

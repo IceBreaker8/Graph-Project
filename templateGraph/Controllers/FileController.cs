@@ -165,9 +165,9 @@ namespace Graph.Controllers {
                     MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
-            if (FileCreator.path != null) {
-                copy = FileCreator.path;
-            }
+
+            copy = FileCreator.path;
+
             FileCreator.LoadFile();
             if (FileCreator.path != null) {
 
@@ -177,8 +177,8 @@ namespace Graph.Controllers {
                     LoadAndSetVertices(objectToRead);
 
                 } else {
-                    if (copy != null)
-                        FileCreator.path = copy;
+
+                    FileCreator.path = copy;
                 }
 
 
