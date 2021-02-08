@@ -27,7 +27,7 @@ namespace Graph.Updater {
 
                     string currentVersion = JSONObj["version"];
                     if (currentVersion != version) { // need to update 
-                        new UpdateWindow(verif);
+                        UpdateWindow.RunUpdateWindow(verif);
                         return true;
                     }
                 }

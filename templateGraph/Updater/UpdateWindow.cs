@@ -10,33 +10,27 @@ using templateGraph;
 namespace Graph.Updater {
     class UpdateWindow {
 
+
+        public static short DelayTime = 1;
         
-        private short DelayTime = 1;
-        public UpdateWindow(bool verif) {
-            if (verif)
-                _ = Delay(0);
-            else
-                _ = Delay(DelayTime);
-
+        public static void RunUpdateWindow(bool verif) {
+            _ = Delay(verif ? 0 : DelayTime);
         }
-
-        private async Task Delay(short delay) {
+        public static async Task Delay(int delay) {
             try {
                 await Task.Delay(delay * 1000);
-                MessageBoxResult result = 
+                MessageBoxResult result =
                     MessageBox.Show("There is a new version available for download, would you like to download it now?", "Update"
                     , MessageBoxButton.YesNo, MessageBoxImage.Information);
                 if (result == MessageBoxResult.Yes) {
                     //redirect link
                     UpdateExtractor ue = new UpdateExtractor();
                     ue.Show();
-                     
-                }
-                else if (result == MessageBoxResult.No) {
+
+                } else if (result == MessageBoxResult.No) {
                     //cancel
                 }
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 MessageBox.Show(e.Message, "Alert"
                     , MessageBoxButton.OK, MessageBoxImage.Warning);
             }
