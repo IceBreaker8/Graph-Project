@@ -18,7 +18,7 @@ namespace templateGraph {
     public partial class MainWindow : Window {
 
 
-        public static bool TestActive = false;
+        public static bool TestActive = true;
 
 
 
@@ -32,7 +32,8 @@ namespace templateGraph {
         
 
         public MainWindow() {
-
+            Graph.Utils.SplashScreen s = new Graph.Utils.SplashScreen();
+            s.Show();
             InitializeComponent();
             main = this;
 
@@ -56,6 +57,7 @@ namespace templateGraph {
             } catch (Exception e) {
                 MessageBox.Show(e.Message);
             }
+            s.Close();
 
         }
         

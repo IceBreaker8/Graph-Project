@@ -1,0 +1,15 @@
+﻿<Window x:Class="Graph.Utils.SplashScreen"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Graph.Utils"
+        mc:Ignorable="d"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        WindowStartupLocation="CenterScreen"
+        Title="SplashScreen" Height="434" Width="830">
+    <Canvas>
+        <Image Source="/Updater/as.png" Height="auto" Width="auto"></Image>
+    </Canvas>
+</Window>
