@@ -1,5 +1,6 @@
 ﻿using Graph.Controllers;
 using Graph.Controllers.AlgorithmController;
+using Graph.MongoDB;
 using Graph.Vertex;
 using System;
 using System.Collections.Generic;
@@ -41,6 +42,7 @@ namespace Graph.GraphAlgorithms.PERT {
                 RemoveAlgorithmBoxes();
             }
             if (CheckIfAlgorithmValid()) {
+                Connector.IncrementData(Connector.DataType.MPM);
                 InitList();
                 CalculateTuples();
                 DisplayBoxes();

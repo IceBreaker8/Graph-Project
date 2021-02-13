@@ -12,7 +12,7 @@ namespace Graph.Updater {
 
     public class UpdateChecker {
 
-        public static string version = "0.0.2";
+        public static string version = "0.0.4";
         public static string VersionLink = "http://graphice.me/graph/25fg3v6xs42c13/version.JSON";
         
         public static bool CheckForUpdate(bool verif) {
@@ -36,8 +36,8 @@ namespace Graph.Updater {
 
             }
             catch (Exception) {
-                MessageBox.Show("Connection error!", "Alert"
-                    , MessageBoxButton.OK, MessageBoxImage.Warning);
+                //MessageBox.Show("Connection error, Couldn't search for updates!", "Alert"
+                  //  , MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             return false;
         }

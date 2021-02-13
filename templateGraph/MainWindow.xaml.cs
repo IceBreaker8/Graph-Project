@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using Graph.Controllers;
 using Graph.Controllers.AlgorithmController;
+using Graph.MongoDB;
 using Graph.Updater;
 using Graph.Utils;
 
@@ -15,6 +17,11 @@ namespace templateGraph {
 
     public partial class MainWindow : Window {
 
+
+        public static bool TestActive = false;
+
+
+
         //buttons management here
         public List<Button> Vertices = new List<Button>();
         public static List<Relation> Relations = new List<Relation>();
@@ -22,18 +29,12 @@ namespace templateGraph {
         public static string AppName = "GraphICE";
         public static MainWindow main;
 
+        
 
         public MainWindow() {
 
             InitializeComponent();
             main = this;
-
-            try {
-                UpdateChecker.CheckForUpdate(false);
-            } catch (Exception e) {
-                MessageBox.Show(e.Message);
-            }
-
 
             //centering window
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
@@ -45,9 +46,21 @@ namespace templateGraph {
             new ButtonController(this);
             new CanvasAndClickCont(this, false);
             new OrdonAlgorithm(this);
+
+            
+            Connector.EstablishConnection();
+            Connector.IncrementData(Connector.DataType.appOpen);
+
+            try {
+                UpdateChecker.CheckForUpdate(false);
+            } catch (Exception e) {
+                MessageBox.Show(e.Message);
+            }
+
         }
+        
 
-
+   
 
         public void AlgoAftermath() {
             if (AlgoController.AlgoStart != null) {
@@ -82,7 +95,7 @@ namespace templateGraph {
             ColorCanvas(EAlgoMode.OFF);
         }
 
-        //NEW THIS
+
         public void ColorCanvas(EAlgoMode algomode) {
             if (algomode == EAlgoMode.ON)
                 this.Canv.Background = new SolidColorBrush(Colors.LightGray);

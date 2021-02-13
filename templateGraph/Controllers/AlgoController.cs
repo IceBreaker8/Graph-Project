@@ -10,9 +10,11 @@ using System.Windows.Media;
 using templateGraph;
 using templateGraph.GraphAlgorithms;
 using Graph.Utils;
+using Graph.MongoDB;
 
 namespace Graph.Controllers.AlgorithmController {
     class AlgoController {
+
         private MainWindow mainWindow;
 
 
@@ -95,6 +97,7 @@ namespace Graph.Controllers.AlgorithmController {
                     MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
+            Connector.IncrementData(Connector.DataType.dijkstra);
             algorunning = true;
             AlgoStarted = true;
             DijktraOnOnce = true;
@@ -121,6 +124,7 @@ namespace Graph.Controllers.AlgorithmController {
             }
             if (CheckNegativeCycles())
                 return;
+            Connector.IncrementData(Connector.DataType.bellman);
             algorunning = true;
             AlgoStarted = true;
             BellmanOnOnce = true;
@@ -142,6 +146,7 @@ namespace Graph.Controllers.AlgorithmController {
             }
             if (CheckNegativeCycles())
                 return;
+            Connector.IncrementData(Connector.DataType.bellmanAme);
             algorunning = true;
             IsBellmanAmeliorated = true;
             AlgoStarted = true;
@@ -169,7 +174,7 @@ namespace Graph.Controllers.AlgorithmController {
 
             if (CheckNegativeCycles())
                 return;
-           
+            Connector.IncrementData(Connector.DataType.floyd);
             F = new Floyd(MainWindow.Relations, mainWindow.Vertices.Count, mainWindow.Vertices, false);
             
             F.Show();

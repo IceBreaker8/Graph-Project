@@ -1,4 +1,5 @@
-﻿using Graph.Vertex;
+﻿using Graph.MongoDB;
+using Graph.Vertex;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -81,7 +82,7 @@ namespace Graph.Controllers {
             VertexPosManager vs = new VertexPosManager(mainWindow, mainWindow.Width, mainWindow.Height);
 
             vs.setAllVerticesPos(mainWindow.Vertices, MainWindow.Relations);
-
+            Connector.IncrementData(Connector.DataType.showByRank);
             mainWindow.UpdateLayout();
 
             foreach (var vertex in mainWindow.Vertices) {
