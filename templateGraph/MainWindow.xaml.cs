@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -29,17 +30,32 @@ namespace templateGraph {
         public static string AppName = "GraphICE";
         public static MainWindow main;
 
-        
+
 
         public MainWindow() {
-            Graph.Utils.SplashScreen s = new Graph.Utils.SplashScreen();
-            s.Show();
+
+
+            //Maybe use splash screen?
             InitializeComponent();
+            Loaded += MainWindow_Loaded;
             main = this;
 
             //centering window
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             //registering events
+            InitializeEvents();
+            CheckForUpdate();
+
+
+        }
+        private void CheckForUpdate() {
+            try {
+                UpdateChecker.CheckForUpdate(false);
+            } catch (Exception e) {
+                MessageBox.Show(e.Message);
+            }
+        }
+        private void InitializeEvents() {
             new HelpController(this);
             new FileController(this);
             new VertexRankController(this);
@@ -47,22 +63,11 @@ namespace templateGraph {
             new ButtonController(this);
             new CanvasAndClickCont(this, false);
             new OrdonAlgorithm(this);
-
-            
-            Connector.EstablishConnection();
-            Connector.IncrementData(Connector.DataType.appOpen);
-
-            try {
-                UpdateChecker.CheckForUpdate(false);
-            } catch (Exception e) {
-                MessageBox.Show(e.Message);
-            }
-            s.Close();
-
         }
-        
 
-   
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e) {
+            Task.Run(() => Connector.EstablishConnection());
+        }
 
         public void AlgoAftermath() {
             if (AlgoController.AlgoStart != null) {

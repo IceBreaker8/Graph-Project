@@ -36,28 +36,16 @@ namespace Graph.MongoDB {
 
         public static void EstablishConnection() {
             try {
-
-                Client = new MongoClient("mongodb://GraphICE:wd9c1PwaGldGYI6K@graphcluster-shard-00-00.f67ke.mongodb.net:27017,graphcluster-shard-00-01.f67ke.mongodb.net:27017,graphcluster-shard-00-02.f67ke.mongodb.net:27017/<dbname>?ssl=true&replicaSet=atlas-dmyh1e-shard-0&authSource=admin&retryWrites=true&w=majority");
+                Client = new MongoClient("mongodb+srv://GraphICE:wd9c1PwaGldGYI6K@graphcluster.f67ke.mongodb.net/test");
                 Database = Client.GetDatabase(DatabaseName);
-
                 Collection = Database.GetCollection<BsonDocument>(CollectionName);
-
-                bool isMongoLive = Database.RunCommandAsync((Command<BsonDocument>)"{ping:1}").Wait(2000);
-
-                if (isMongoLive) {
-                    //MessageBox.Show("Connected");
-                    FirstDocument = Collection.Find(new BsonDocument()).FirstOrDefault();
-                    IsConnected = true;
-                } else {
-                    //MessageBox.Show("Failed");
-                }
-
-
-            } catch (Exception e) {
-                MessageBox.Show(e.Message);
-
+                IsConnected = true;
+                Connector.IncrementData(Connector.DataType.appOpen);
+            } catch (Exception) {
+                Application.Current.Dispatcher.BeginInvoke(new Action(() => {
+                    
+                }));
             }
-
         }
 
         public static void IncrementData(DataType dataType) {
