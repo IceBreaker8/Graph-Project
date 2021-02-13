@@ -18,7 +18,7 @@ namespace templateGraph {
     public partial class MainWindow : Window {
 
 
-        public static bool TestActive = true;
+        public static bool TestActive = false;
 
 
 

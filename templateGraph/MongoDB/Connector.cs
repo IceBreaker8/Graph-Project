@@ -65,7 +65,7 @@ namespace Graph.MongoDB {
                 return;
             if (MainWindow.TestActive)
                 return;
-
+            FirstDocument = Collection.Find(new BsonDocument()).FirstOrDefault();
             var filter = Builders<BsonDocument>.Filter.Eq("graphApp", "GraphICE");
             var update = Builders<BsonDocument>.Update.Set(dataType.ToString(),
                 Int32.Parse(FirstDocument[dataType.ToString()].ToString())

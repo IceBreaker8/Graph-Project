@@ -12,7 +12,7 @@ namespace Graph.Updater {
 
     public class UpdateChecker {
 
-        public static string version = "0.0.5";
+        public static string version = "0.0.1";
         public static string VersionLink = "http://graphice.me/graph/25fg3v6xs42c13/version.JSON";
         
         public static bool CheckForUpdate(bool verif) {
