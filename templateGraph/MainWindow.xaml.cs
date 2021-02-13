@@ -44,7 +44,7 @@ namespace templateGraph {
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             //registering events
             InitializeEvents();
-            CheckForUpdate();
+
 
 
         }
@@ -67,6 +67,7 @@ namespace templateGraph {
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e) {
             Task.Run(() => Connector.EstablishConnection());
+            Task.Run(() => CheckForUpdate());
         }
 
         public void AlgoAftermath() {
