@@ -1,17 +1,13 @@
 ﻿using Graph.Controllers.AlgorithmController;
 using Graph.GraphAlgorithms;
 using Graph.GraphAlgorithms.PERT;
+using Graph.Utils;
 using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using templateGraph;
-using Graph.Utils;
 
 namespace Graph.Controllers {
     class ButtonController {
@@ -39,8 +35,7 @@ namespace Graph.Controllers {
 
                 End = VertexMenu.Items[4] as MenuItem;
 
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 MessageBox.Show(e.Message);
             }
 
@@ -53,8 +48,7 @@ namespace Graph.Controllers {
                 Delete.Click += VertexDeletion;
                 Start.Click += VertexStartTrigger;
                 End.Click += VertexEndTrigger;
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 MessageBox.Show(e.Message);
             }
 
@@ -211,7 +205,7 @@ namespace Graph.Controllers {
 
             }
         }
-        
+
         public void ClearCanvasColor() {
             ColorCanvas(EAlgoMode.OFF);
             AlgoController.BellmanOnOnce = false;

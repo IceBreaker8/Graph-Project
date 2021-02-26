@@ -103,9 +103,21 @@ namespace Graph.Controllers {
 
                 Relation relation = new Relation(getButtonByName(list[0]));
                 MainWindow.Relations.Add(relation);
-
+                Relation.LinkType linkType;
+                switch (list[2]) {
+                    case "1":
+                        linkType = Relation.LinkType.DirectedArrow;
+                        break;
+                    case "2":
+                        linkType = Relation.LinkType.CurvedArrow;
+                        break;
+                    default:
+                        linkType = Relation.LinkType.UndirectedArrow;
+                        break;
+                }
+                
                 relation.StartConnection(getButtonByName(list[1]), mainWindow, mainWindow.Canv,
-                    Int32.Parse(list[3]), list[2].Equals("2"));
+                    Int32.Parse(list[3]), linkType);
                 relation.isConnected = true;
 
 

@@ -24,7 +24,7 @@ namespace templateGraph {
 
         //Polygon textblock location
         private Point Tloc;
-        public bool CurveMade = false;
+
 
 
 
@@ -75,29 +75,37 @@ namespace templateGraph {
         public Button GetEndButton() {
             return this.ConEnd;
         }
+
+        public enum LinkType {
+
+            DirectedArrow,
+            CurvedArrow,
+            UndirectedArrow
+
+        }
+        public LinkType linkType;
         public void StartConnection(Button b2, Window MainWindow, Canvas Canv,
-            int transition, bool CurveMade) {
-            this.CurveMade = CurveMade;
+            int transition, LinkType linkType) {
+            this.linkType = linkType;
             this.transition = transition;
             this.Canv = Canv;
             this.w = MainWindow;
             this.ConEnd = b2;
             this.isConnected = true;
-            if (CurveMade) {
+            if (linkType == LinkType.CurvedArrow) {
                 FixPoints();
                 new CurvedArrow().MakeCurve(ref StartLocation, ref EndLocation, ref myPath
             , ref p2, ref Canv, ref Tloc, ref Q, ref P, ref PF, ref Pa);
                 CreateTextOnArrow();
                 CreateArrow("yes");
                 UpdateCurve();
-            }
-            else {
+            } else if (linkType == LinkType.DirectedArrow) {
                 CreateArrow("yes");
 
             }
         }
 
-        
+
         public Point GetLocation(Button b) {
             Point relativePoint = b.TransformToAncestor(w)
                           .Transform(new Point(0, 0));
@@ -134,19 +142,19 @@ namespace templateGraph {
             CreateArrow("no");
         }
         public void CreateArrow(String s) {
-            if (!CurveMade) {
+            if (linkType != LinkType.CurvedArrow) {
                 FixPoints();
             }
-            var points = new Arrow().createArrow(ref EndLocation, ref CurveMade, ref Tloc, ref p2,
+            var points = new Arrow().createArrow(ref EndLocation, ref linkType, ref Tloc, ref p2,
                 ref StartLocation, ref EndLocation, 3);
             this.polygon = new Polygon();
             this.polygon.Points = points;
             this.polygon.Fill = Color;
             this.polygon.IsHitTestVisible = true;
-            
+
             this.Canv.Children.Add(this.polygon);
             Canvas.SetZIndex(polygon, 0);
-            if (!CurveMade) {
+            if (linkType != LinkType.CurvedArrow) {
                 if (s == "yes") {
                     CreateTextOnArrow();
                 }

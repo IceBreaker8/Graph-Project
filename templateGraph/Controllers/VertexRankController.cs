@@ -82,7 +82,7 @@ namespace Graph.Controllers {
             VertexPosManager vs = new VertexPosManager(mainWindow, mainWindow.Width, mainWindow.Height);
 
             vs.setAllVerticesPos(mainWindow.Vertices, MainWindow.Relations);
-            Connector.IncrementData(Connector.DataType.showByRank);
+            
             mainWindow.UpdateLayout();
 
             foreach (var vertex in mainWindow.Vertices) {
@@ -90,13 +90,13 @@ namespace Graph.Controllers {
                 UpdateRelations(vertex);
 
             }
-
+            Connector.IncrementData(Connector.DataType.showByRank);
 
         }
         public void UpdateRelations(Button b) {
             foreach (Relation r in MainWindow.Relations) {
                 if (r.ConStart == b || r.ConEnd == b)
-                    if (r.CurveMade) {
+                    if (r.linkType == Relation.LinkType.CurvedArrow) {
                         r.UpdateCurve();
                         r.UpdatePolygon();
                     }

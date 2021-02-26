@@ -7,15 +7,16 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using static templateGraph.Relation;
 
 namespace templateGraph.LinkManager {
     class Arrow {
         private const double _maxArrowLengthPercent = 0.4; // factor that determines how the arrow is shortened for very short lines
         private const double _lineArrowLengthFactor = 2.41; // 15 degrees arrow:  = 1 / Math.Tan(15 * Math.PI / 180); 
 
-        public PointCollection createArrow(ref Point EndLocation, ref bool CurveMade,
+        public PointCollection createArrow(ref Point EndLocation, ref LinkType linkType,
             ref Point Tloc, ref Point p2, ref Point startPoint, ref Point endPoint, double lineWidth) {
-            if (CurveMade) {
+            if (linkType == LinkType.CurvedArrow) {
 
                 Vector d = endPoint - Tloc;
 
@@ -64,8 +65,7 @@ namespace templateGraph.LinkManager {
                 p2 = GetThirdPoint(EndLocation, Tloc, 8);
 
                 return pointCollection;
-            }
-            else {
+            } else {
 
                 Vector direction = endPoint - startPoint;
 
@@ -141,21 +141,18 @@ namespace templateGraph.LinkManager {
                 double x = (startPoint.X - endPoint.X) / 2 + endPoint.X;
                 double y = (endPoint.Y - startPoint.Y) / 2 + startPoint.Y;
                 return new Point(x, y);
-            }
-            else if (endPoint.X >= startPoint.X && endPoint.Y >= startPoint.Y) {
+            } else if (endPoint.X >= startPoint.X && endPoint.Y >= startPoint.Y) {
 
                 double x = (endPoint.X - startPoint.X) / 2 + startPoint.X;
                 double y = (endPoint.Y - startPoint.Y) / 2 + startPoint.Y;
                 return new Point(x, y);
 
 
-            }
-            else if (endPoint.X >= startPoint.X && startPoint.Y >= endPoint.Y) {
+            } else if (endPoint.X >= startPoint.X && startPoint.Y >= endPoint.Y) {
                 double x = (endPoint.X - startPoint.X) / 2 + startPoint.X;
                 double y = (startPoint.Y - endPoint.Y) / 2 + endPoint.Y;
                 return new Point(x, y);
-            }
-            else if (startPoint.X >= endPoint.X && startPoint.Y >= endPoint.Y) {
+            } else if (startPoint.X >= endPoint.X && startPoint.Y >= endPoint.Y) {
                 double x = (startPoint.X - endPoint.X) / 2 + endPoint.X;
                 double y = (startPoint.Y - endPoint.Y) / 2 + endPoint.Y;
                 return new Point(x, y);

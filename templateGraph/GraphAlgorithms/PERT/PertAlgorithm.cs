@@ -42,13 +42,14 @@ namespace Graph.GraphAlgorithms.PERT {
                 RemoveAlgorithmBoxes();
             }
             if (CheckIfAlgorithmValid()) {
-                Connector.IncrementData(Connector.DataType.MPM);
+                
                 InitList();
                 CalculateTuples();
                 DisplayBoxes();
                 AlgoController.algorunning = true;
                 AlgoController.AlgoStarted = true;
                 PertRunning = true;
+                Connector.IncrementData(Connector.DataType.MPM);
             }
 
         }
@@ -182,7 +183,7 @@ namespace Graph.GraphAlgorithms.PERT {
         public void UpdateRelations(Button b) {
             foreach (Relation r in MainWindow.Relations) {
                 if (r.ConStart == b || r.ConEnd == b)
-                    if (r.CurveMade) {
+                    if (r.linkType == Relation.LinkType.CurvedArrow) {
                         r.UpdateCurve();
                         r.UpdatePolygon();
                     }
@@ -217,7 +218,7 @@ namespace Graph.GraphAlgorithms.PERT {
 
         private bool HasCurvedArrow() {
             foreach (Relation relation in MainWindow.Relations) {
-                if (relation.CurveMade == true) {
+                if (relation.linkType == Relation.LinkType.CurvedArrow) {
                     return false;
                 }
             }

@@ -1,16 +1,11 @@
 ﻿using Graph.GraphAlgorithms;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Graph.MongoDB;
+using Graph.Utils;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using templateGraph;
 using templateGraph.GraphAlgorithms;
-using Graph.Utils;
-using Graph.MongoDB;
 
 namespace Graph.Controllers.AlgorithmController {
     class AlgoController {
@@ -97,7 +92,7 @@ namespace Graph.Controllers.AlgorithmController {
                     MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
-            Connector.IncrementData(Connector.DataType.dijkstra);
+
             algorunning = true;
             AlgoStarted = true;
             DijktraOnOnce = true;
@@ -106,6 +101,7 @@ namespace Graph.Controllers.AlgorithmController {
                 mainWindow.ColorCanvas(EAlgoMode.ON);
                 MessageBox.Show("Please select the starting vertex!", "Info",
                     MessageBoxButton.OK, MessageBoxImage.Information);
+                Connector.IncrementData(Connector.DataType.dijkstra);
                 return;
             }
 
@@ -124,7 +120,7 @@ namespace Graph.Controllers.AlgorithmController {
             }
             if (CheckNegativeCycles())
                 return;
-            Connector.IncrementData(Connector.DataType.bellman);
+
             algorunning = true;
             AlgoStarted = true;
             BellmanOnOnce = true;
@@ -133,6 +129,7 @@ namespace Graph.Controllers.AlgorithmController {
                 mainWindow.ColorCanvas(EAlgoMode.ON);
                 MessageBox.Show("Please select the starting vertex!", "Info",
                     MessageBoxButton.OK, MessageBoxImage.Information);
+                Connector.IncrementData(Connector.DataType.bellman);
                 return;
             }
         }
@@ -146,7 +143,7 @@ namespace Graph.Controllers.AlgorithmController {
             }
             if (CheckNegativeCycles())
                 return;
-            Connector.IncrementData(Connector.DataType.bellmanAme);
+
             algorunning = true;
             IsBellmanAmeliorated = true;
             AlgoStarted = true;
@@ -156,6 +153,7 @@ namespace Graph.Controllers.AlgorithmController {
                 mainWindow.ColorCanvas(EAlgoMode.ON);
                 MessageBox.Show("Please select the starting vertex!", "Info",
                     MessageBoxButton.OK, MessageBoxImage.Information);
+                Connector.IncrementData(Connector.DataType.bellmanAme);
                 return;
             }
         }
@@ -174,19 +172,19 @@ namespace Graph.Controllers.AlgorithmController {
 
             if (CheckNegativeCycles())
                 return;
-            Connector.IncrementData(Connector.DataType.floyd);
+
             F = new Floyd(MainWindow.Relations, mainWindow.Vertices.Count, mainWindow.Vertices, false);
-            
+
             F.Show();
             AlgoStarted = true;
             algorunning = true;
             firstStart = true;
-
+            Connector.IncrementData(Connector.DataType.floyd);
         }
 
         private bool CheckNegativeCycles() {
             Floyd fl = new Floyd(MainWindow.Relations, mainWindow.Vertices.Count, mainWindow.Vertices, true);
-            
+
             if (fl.NegCycle()) {
                 MessageBox.Show("You can't execute this algorithm with negative cycles!", "Alert",
                    MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -263,6 +261,6 @@ namespace Graph.Controllers.AlgorithmController {
             }
 
         }
-        
+
     }
 }

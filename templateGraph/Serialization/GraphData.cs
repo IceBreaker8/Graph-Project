@@ -40,7 +40,7 @@ namespace Graph.Serialization {
                 List<string> listToAdd = new List<string>();
                 listToAdd.Add(relation.GetStartButton().Content.ToString());
                 listToAdd.Add(relation.GetEndButton().Content.ToString());
-                if (relation.CurveMade) {
+                if (relation.linkType == Relation.LinkType.CurvedArrow) {
                     listToAdd.Add("2");
                 }
                 else {

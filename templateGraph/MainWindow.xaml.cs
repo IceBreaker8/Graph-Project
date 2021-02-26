@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Net;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media;
-using Graph.Controllers;
+﻿using Graph.Controllers;
 using Graph.Controllers.AlgorithmController;
 using Graph.MongoDB;
 using Graph.Updater;
 using Graph.Utils;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace templateGraph {
 
@@ -39,12 +36,12 @@ namespace templateGraph {
             InitializeComponent();
             Loaded += MainWindow_Loaded;
             main = this;
-
+            CheckForUpdate();
             //centering window
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             //registering events
             InitializeEvents();
-            CheckForUpdate();
+
 
 
         }

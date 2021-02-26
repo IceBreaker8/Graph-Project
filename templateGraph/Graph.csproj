@@ -198,7 +198,7 @@
     <Compile Include="GraphAlgorithms\PERT\VertexTupleBox.cs" />
     <Compile Include="LinkManager\Arrow.cs" />
     <Compile Include="LinkManager\CurvedArrow.cs" />
-    <Compile Include="MongoDB\Connector.cs" />
+    <Compile Include="Utils\Connector.cs" />
     <Compile Include="Serialization\Serializer.cs" />
     <Compile Include="Serialization\FileCreator.cs" />
     <Compile Include="Serialization\GraphData.cs" />
@@ -320,9 +320,7 @@
   <ItemGroup>
     <Resource Include="graphIcon.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Main\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Core\Compression\Snappy\lib\win\snappy32.dll" />
     <Content Include="Core\Compression\Snappy\lib\win\snappy64.dll" />
