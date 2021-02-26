@@ -1,12 +1,10 @@
 ﻿using Graph.Controllers;
 using Graph.Controllers.AlgorithmController;
 using Graph.GraphAlgorithms.PERT;
+using Graph.LinkManager;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using templateGraph.LinkManager;
@@ -102,6 +100,8 @@ namespace templateGraph {
             } else if (linkType == LinkType.DirectedArrow) {
                 CreateArrow("yes");
 
+            } else {
+                CreateArrow("yes");
             }
         }
 
@@ -145,21 +145,40 @@ namespace templateGraph {
             if (linkType != LinkType.CurvedArrow) {
                 FixPoints();
             }
-            var points = new Arrow().createArrow(ref EndLocation, ref linkType, ref Tloc, ref p2,
-                ref StartLocation, ref EndLocation, 3);
-            this.polygon = new Polygon();
-            this.polygon.Points = points;
-            this.polygon.Fill = Color;
-            this.polygon.IsHitTestVisible = true;
+            if (linkType == LinkType.UndirectedArrow) {
+                var points = new LineUnd().createArrow(ref EndLocation, ref Tloc, ref p2,
+                    ref StartLocation, ref EndLocation, 3);
+                this.polygon = new Polygon();
+                this.polygon.Points = points;
+                this.polygon.Fill = Color;
+                this.polygon.IsHitTestVisible = true;
 
-            this.Canv.Children.Add(this.polygon);
-            Canvas.SetZIndex(polygon, 0);
-            if (linkType != LinkType.CurvedArrow) {
-                if (s == "yes") {
-                    CreateTextOnArrow();
+                this.Canv.Children.Add(this.polygon);
+                Canvas.SetZIndex(polygon, 0);
+                if (linkType != LinkType.CurvedArrow) {
+                    if (s == "yes") {
+                        CreateTextOnArrow();
+                    }
+                    UpdateTextOnArrow();
                 }
-                UpdateTextOnArrow();
+            } else {
+                var points = new Arrow().createArrow(ref EndLocation, ref linkType, ref Tloc, ref p2,
+                    ref StartLocation, ref EndLocation, 3);
+                this.polygon = new Polygon();
+                this.polygon.Points = points;
+                this.polygon.Fill = Color;
+                this.polygon.IsHitTestVisible = true;
+
+                this.Canv.Children.Add(this.polygon);
+                Canvas.SetZIndex(polygon, 0);
+                if (linkType != LinkType.CurvedArrow) {
+                    if (s == "yes") {
+                        CreateTextOnArrow();
+                    }
+                    UpdateTextOnArrow();
+                }
             }
+
 
 
         }
@@ -303,6 +322,16 @@ namespace templateGraph {
             if (inputDialog.ShowDialog() == true && inputDialog.Answer != "") {
                 this.transition = Int32.Parse(inputDialog.Answer);
                 UpdateTextOnArrow();
+                if (this.linkType == LinkType.UndirectedArrow) {
+                    foreach (Relation r in MainWindow.Relations) {
+                        if (r.ConStart == this.ConStart && r.ConEnd == this.ConEnd
+                            || r.ConEnd == this.ConStart && r.ConStart == this.ConEnd) {
+                            r.transition = Int32.Parse(inputDialog.Answer);
+                            r.UpdateTextOnArrow();
+                            break;
+                        }
+                    }
+                }
             }
         }
         private void DeleteClickEvent(object sender, RoutedEventArgs e) {
@@ -312,7 +341,16 @@ namespace templateGraph {
             }
             DestroyRelation(this);
             this.DestructRelation();
-
+            if (this.linkType == LinkType.UndirectedArrow) {
+                foreach (Relation r in MainWindow.Relations) {
+                    if (r.ConStart == this.ConStart && r.ConEnd == this.ConEnd
+                        || r.ConEnd == this.ConStart && r.ConStart == this.ConEnd) {
+                        DestroyRelation(r);
+                        r.DestructRelation();
+                        break;
+                    }
+                }
+            }
 
         }
         public void DestroyRelation(Relation relation) {

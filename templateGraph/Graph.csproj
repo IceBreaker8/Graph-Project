@@ -181,6 +181,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Controllers\AlgoController.cs" />
+    <Compile Include="Controllers\ArrowTypeController.cs" />
     <Compile Include="Controllers\ButtonController.cs" />
     <Compile Include="Controllers\CanvasAndClickCont.cs" />
     <Compile Include="Controllers\FileController.cs" />
@@ -198,6 +199,7 @@
     <Compile Include="GraphAlgorithms\PERT\VertexTupleBox.cs" />
     <Compile Include="LinkManager\Arrow.cs" />
     <Compile Include="LinkManager\CurvedArrow.cs" />
+    <Compile Include="LinkManager\LineUnd.cs" />
     <Compile Include="Utils\Connector.cs" />
     <Compile Include="Serialization\Serializer.cs" />
     <Compile Include="Serialization\FileCreator.cs" />

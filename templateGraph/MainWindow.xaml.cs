@@ -60,6 +60,7 @@ namespace templateGraph {
             new ButtonController(this);
             new CanvasAndClickCont(this, false);
             new OrdonAlgorithm(this);
+            new ArrowTypeController();
         }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e) {

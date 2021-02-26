@@ -25,6 +25,8 @@
 
 
             </MenuItem>
+            
+            
             <MenuItem Name="Execute" Header="_Execute" 
                       Width="auto"
                       Height="19" FontWeight="Normal" FontStyle="Normal">
@@ -50,7 +52,15 @@
                 </MenuItem>
 
             </MenuItem>
+            <MenuItem Name="ArrowMode" Header="_Arrow Mode" >
 
+                <MenuItem Name="DirectedArrow" Header="Directed Arrow" IsCheckable="True" IsChecked="True"/>
+                <MenuItem Name="UndirectedArrow" Header="Undirected Arrow" IsCheckable="True"/>
+
+
+            </MenuItem>
+                
+              
             <MenuItem Name ="Help" Header="_Help" 
                       Width="36" Height="19" FontWeight="Normal" FontStyle="Normal">
                 <MenuItem Name="Update" Header="Check For Updates"/>

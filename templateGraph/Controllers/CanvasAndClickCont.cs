@@ -388,34 +388,63 @@ namespace Graph.Controllers {
                                 return;
                             }
                             Button b = (Button)sender;
-                            /* 
-                             check if user wants directed arrow
-                             
-                             
-                             */
-                            if (CheckIfRelationExists(b, StartButton)) {
-                                r.StartConnection(b, mainWindow,
-                                    mainWindow.Canv, Int32.Parse(inputDialog.Answer), 
-                                    Relation.LinkType.CurvedArrow);
+                            if (ArrowTypeController.DirectedArrow.IsChecked) {
+                                if (CheckIfRelationExists(b, StartButton)) {
+                                    r.StartConnection(b, mainWindow,
+                                        mainWindow.Canv, Int32.Parse(inputDialog.Answer),
+                                        Relation.LinkType.CurvedArrow);
 
-                                r.isConnected = true;
-                                didStart = false;
-                                doubleClickOn = false;
-                                SelectOtherButtons(null, Mode.restore);
-                                AlgoController.AlgoStarted = false;
-                                return;
+                                    r.isConnected = true;
+                                    didStart = false;
+                                    doubleClickOn = false;
+                                    SelectOtherButtons(null, Mode.restore);
+                                    AlgoController.AlgoStarted = false;
+                                    return;
+                                } else {
+                                    r.StartConnection(b, mainWindow,
+                                        mainWindow.Canv, Int32.Parse(inputDialog.Answer),
+                                        Relation.LinkType.DirectedArrow);
+
+                                    r.isConnected = true;
+                                    didStart = false;
+                                    doubleClickOn = false;
+                                    SelectOtherButtons(null, Mode.restore);
+                                    AlgoController.AlgoStarted = false;
+                                    return;
+                                }
                             } else {
-                                r.StartConnection(b, mainWindow,
-                                    mainWindow.Canv, Int32.Parse(inputDialog.Answer), 
-                                    Relation.LinkType.DirectedArrow);
 
-                                r.isConnected = true;
-                                didStart = false;
-                                doubleClickOn = false;
-                                SelectOtherButtons(null, Mode.restore);
-                                AlgoController.AlgoStarted = false;
-                                return;
+                                if (!CheckForAnyRelation(b, StartButton)) {
+                                    r.StartConnection(b, mainWindow,
+                                        mainWindow.Canv, Int32.Parse(inputDialog.Answer),
+                                        Relation.LinkType.UndirectedArrow);
+
+                                    Relation r2 = new Relation(b);
+                                    MainWindow.Relations.Add(r2);
+                                    r2.StartConnection(r.ConStart, mainWindow,
+                                        mainWindow.Canv, Int32.Parse(inputDialog.Answer),
+                                        Relation.LinkType.UndirectedArrow);
+
+
+                                    r.isConnected = true;
+                                    r2.isConnected = true;
+                                    
+                                    didStart = false;
+                                    doubleClickOn = false;
+                                    SelectOtherButtons(null, Mode.restore);
+                                    AlgoController.AlgoStarted = false;
+                                    return;
+
+                                } else {
+                                    MessageBox.Show("These vertices are already connected!", "Alert",
+                                          MessageBoxButton.OK, MessageBoxImage.Warning);
+                                    ThrowVertexConnectionError();
+                                    return;
+                                }
+
+
                             }
+
 
                         } else {
 
@@ -434,7 +463,14 @@ namespace Graph.Controllers {
 
         }
 
-
+        private bool CheckForAnyRelation(Button begin, Button end) {
+            foreach (Relation R in MainWindow.Relations) {
+                if (R.ConStart == begin && R.ConEnd == end || R.ConStart == end && R.ConEnd == begin) {
+                    return true;
+                }
+            }
+            return false;
+        }
         private bool CheckIfRelationExists(Button begin, Button end) {
 
             foreach (Relation R in MainWindow.Relations) {
