@@ -163,6 +163,8 @@ namespace Graph.Controllers {
             IsDragging = false;
 
             ColorCanvas(EAlgoMode.OFF);
+
+            
         }
 
         public void ColorCanvas(EAlgoMode algomode) {
@@ -189,6 +191,7 @@ namespace Graph.Controllers {
             bool verif = false;
             if (Agree == Mode.auto) {
                 foreach (Button b in mainWindow.Vertices) {
+
                     verif = false;
                     if (button == b) {
                         continue;
@@ -202,7 +205,17 @@ namespace Graph.Controllers {
                     }
                     if (verif == false) {
                         b.Background = Brushes.Gray;
+                        if (DirectedRelationExists(button, b)) {
+                            if (ArrowTypeController.UndirectedArrow.IsChecked) {
+                                b.Background = Brushes.White;
+                            }
+                            
+                        }
+                       
                     }
+                    
+
+
 
                 }
             } else if (Agree == Mode.restore) {
@@ -244,11 +257,12 @@ namespace Graph.Controllers {
                 IsDragging = false;
                 return;
             }
+            Button b = (Button)sender;
 
             ///color canvas
             AlgoController.AlgoStarted = true;
 
-            Button b = (Button)sender;
+
             StartButton = b;
 
             firstRelation = new Relation(b);
@@ -257,9 +271,36 @@ namespace Graph.Controllers {
             MainWindow.Relations.Add(firstRelation);
             SelectOtherButtons(b, Mode.auto);
             IsDragging = false;
+            if (AreAllWhite()) {
+                MessageBox.Show("You can't make more connections!", "Alert",
+                        MessageBoxButton.OK, MessageBoxImage.Warning);
+                ThrowVertexConnectionError();
+                return;
+            }
 
         }
-        private bool doubleClickOn = false;
+        private bool AreAllWhite() {
+            foreach (Button b in MainWindow.main.Vertices) {
+                if (b.Background != Brushes.White) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        private bool DirectedRelationExists(Button b,Button b2) {
+            foreach (Relation R in MainWindow.Relations) {
+                if (R.ConStart == b && R.ConEnd == b2 ||
+                    R.ConStart == b2 && R.ConEnd == b) {
+                    if (R.linkType == Relation.LinkType.DirectedArrow) {
+
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        public static bool doubleClickOn = false;
         public static DashLine l;
         private void VertexMouseDrag(object sender, MouseEventArgs e) {
             if (l != null) {
@@ -428,7 +469,7 @@ namespace Graph.Controllers {
 
                                     r.isConnected = true;
                                     r2.isConnected = true;
-                                    
+
                                     didStart = false;
                                     doubleClickOn = false;
                                     SelectOtherButtons(null, Mode.restore);

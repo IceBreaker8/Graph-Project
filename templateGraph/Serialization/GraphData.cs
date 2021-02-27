@@ -30,7 +30,7 @@ namespace Graph.Serialization {
                 buttons[but.Content.ToString()] = vs.GetLocation(but);
 
             }
-          
+
         }
         private void MakeList(List<Relation> relations) {
             myList = new List<List<string>>();
@@ -42,8 +42,9 @@ namespace Graph.Serialization {
                 listToAdd.Add(relation.GetEndButton().Content.ToString());
                 if (relation.linkType == Relation.LinkType.CurvedArrow) {
                     listToAdd.Add("2");
-                }
-                else {
+                } else if (relation.linkType == Relation.LinkType.UndirectedArrow) {
+                    listToAdd.Add("3");
+                } else {
                     listToAdd.Add("1");
                 }
 

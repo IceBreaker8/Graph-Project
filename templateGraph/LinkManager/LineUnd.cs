@@ -51,17 +51,16 @@ namespace Graph.LinkManager {
 
 
             // Now we have all the vectors so we can create the arrow shape positions
-            var pointCollection = new PointCollection(6);
+            var pointCollection = new PointCollection(4);
 
-            Point endArrowCenterPosition = endPoint - (normalizedDirection * usedArrowLength);
-
-           
-            pointCollection.Add(endArrowCenterPosition + arrowWidthVector);
-            pointCollection.Add(endArrowCenterPosition + lineWidenVector);
+            
+            pointCollection.Add(endPoint + lineWidenVector);
             pointCollection.Add(startPoint + lineWidenVector);
             pointCollection.Add(startPoint - lineWidenVector);
-            pointCollection.Add(endArrowCenterPosition - lineWidenVector);
-            pointCollection.Add(endArrowCenterPosition - arrowWidthVector);
+            
+            pointCollection.Add(endPoint);
+
+            
             Tloc = getTLoc(startPoint, endPoint);
 
 

@@ -195,9 +195,9 @@ namespace Graph.Controllers {
                     FileCreator.path = copy;
                 }
 
-
+                
             }
-
+            CanvasAndClickCont.doubleClickOn = false;
 
         }
         private void NewData() {
