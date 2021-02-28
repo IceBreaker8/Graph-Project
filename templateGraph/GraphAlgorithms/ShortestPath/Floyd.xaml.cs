@@ -299,6 +299,11 @@ namespace templateGraph.GraphAlgorithms {
                     if (R.ConStart.Content.ToString() == preds[i]
                         && R.ConEnd.Content.ToString() == preds[i - 1]) {
                         R.ColorArrow(Brushes.Red);
+                        foreach (Relation r2 in MainWindow.Relations) {
+                            if (r2.ConStart == R.ConEnd && R.ConStart == r2.ConEnd) {
+                                r2.ColorArrow(Brushes.Red);
+                            }
+                        }
                     }
                 }
             }
@@ -323,10 +328,6 @@ namespace templateGraph.GraphAlgorithms {
         }
 
 
-        public void ColorNegCycle() {
-            //later
-
-        }
     }
 
 }

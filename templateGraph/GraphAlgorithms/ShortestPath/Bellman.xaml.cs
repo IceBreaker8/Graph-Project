@@ -148,15 +148,13 @@ namespace Graph.GraphAlgorithms {
                                     PredMin = outputTable[0, f];
                                     minT = transition + intDistance[k, f];
 
-                                }
-                                else if (transition + intDistance[k, f] == minT &&
-                                    PredsString[k, j] == "") {
+                                } else if (transition + intDistance[k, f] == minT &&
+                                      PredsString[k, j] == "") {
                                     PredMin += "," + outputTable[0, f];
 
 
-                                }
-                                else if (transition + intDistance[k, f] == minT &&
-                                    !PredsString[k, j].Contains(outputTable[0, f])) {
+                                } else if (transition + intDistance[k, f] == minT &&
+                                      !PredsString[k, j].Contains(outputTable[0, f])) {
                                     PredMin = PredsString[k, j] + "," + outputTable[0, f];
 
 
@@ -171,17 +169,15 @@ namespace Graph.GraphAlgorithms {
                                     PredMin = outputTable[0, f];
                                     minT = transition + intDistance[k + 1, f];
 
-                                }
-                                else if (transition + intDistance[k + 1, f] == minT &&
-                                    PredsString[k, j] == "" &&
-                                    !PredMin.Contains(outputTable[0, f])) {
+                                } else if (transition + intDistance[k + 1, f] == minT &&
+                                      PredsString[k, j] == "" &&
+                                      !PredMin.Contains(outputTable[0, f])) {
                                     PredMin += "," + outputTable[0, f];
 
 
-                                }
-                                else if (transition + intDistance[k + 1, f] == minT &&
-                                    !PredsString[k, j].Contains(outputTable[0, f]) &&
-                                    !PredMin.Contains(outputTable[0, f])) {
+                                } else if (transition + intDistance[k + 1, f] == minT &&
+                                      !PredsString[k, j].Contains(outputTable[0, f]) &&
+                                      !PredMin.Contains(outputTable[0, f])) {
                                     PredMin = PredsString[k, j] + "," + outputTable[0, f];
 
 
@@ -195,8 +191,7 @@ namespace Graph.GraphAlgorithms {
                     PredsString[k + 1, j] = PredMin;
                     if (minT == INF) {
                         outputTable[k + 1, j] = "INF";
-                    }
-                    else {
+                    } else {
                         outputTable[k + 1, j] = minT.ToString();
                     }
                     intDistance[k + 1, j] = minT;
@@ -205,8 +200,7 @@ namespace Graph.GraphAlgorithms {
 
                 if (CheckPreviousLine(k + 1, k)) {
                     break;
-                }
-                else {
+                } else {
                     if (k == size) {
                         if (!CheckPreviousLine(k + 1, k)) {
                             MessageBox.Show("Absorbant!", "Alert", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -229,16 +223,14 @@ namespace Graph.GraphAlgorithms {
 
             if (BellmanAmeliorated) {
                 to = new GridDisplay("Bellman Ameliorated", this.kHeight + 1, this.size + 1);
-            }
-            else {
+            } else {
                 to = new GridDisplay("Bellman", this.kHeight + 1, this.size + 1);
             }
             for (int i = 0; i <= this.kHeight; i++) {
                 for (int j = 0; j <= size; j++) {
                     if (i == 0 || j == 0) {
                         to.AddCell(i, j, new Run(outputTable[i, j]) { FontWeight = FontWeights.Bold }, null);
-                    }
-                    else {
+                    } else {
                         if (j >= 2) {
                             to.AddCell(i, j, new Run(outputTable[i, j]),
                                 new Run(PredsString[i, j]) {
@@ -247,8 +239,7 @@ namespace Graph.GraphAlgorithms {
                                     FontSize = 12
                                 });
 
-                        }
-                        else {
+                        } else {
                             to.AddCell(i, j, new Run(outputTable[i, j]), null);
                         }
                     }
@@ -304,8 +295,7 @@ namespace Graph.GraphAlgorithms {
                             next = PredsString[kHeight, j].ToString()
                                 .Substring(0, PredsString[kHeight, j].ToString().IndexOf(","));
                             result.Add(next);
-                        }
-                        else {
+                        } else {
                             if (PredsString[kHeight, j].ToString() == algoStart.Content.ToString()) {
 
                                 result.Add(algoStart.Content.ToString());
@@ -340,6 +330,15 @@ namespace Graph.GraphAlgorithms {
                     if (R.ConStart.Content.ToString() == result[i]
                         && R.ConEnd.Content.ToString() == result[i - 1]) {
                         R.ColorArrow(Brushes.Red);
+
+
+                        foreach (Relation r2 in MainWindow.Relations) {
+                            if (r2.ConStart == R.ConEnd && R.ConStart == r2.ConEnd) {
+                                r2.ColorArrow(Brushes.Red);
+                            }
+                        }
+
+
                     }
                 }
             }

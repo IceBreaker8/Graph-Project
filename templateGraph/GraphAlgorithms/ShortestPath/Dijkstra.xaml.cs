@@ -310,6 +310,11 @@ namespace Graph.GraphAlgorithms {
                     if (R.ConStart.Content.ToString() == result[i]
                         && R.ConEnd.Content.ToString() == result[i - 1]) {
                         R.ColorArrow(Brushes.Red);
+                        foreach (Relation r2 in MainWindow.Relations) {
+                            if (r2.ConStart == R.ConEnd && R.ConStart == r2.ConEnd) {
+                                r2.ColorArrow(Brushes.Red);
+                            }
+                        }
                     }
                 }
             }

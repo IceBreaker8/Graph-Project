@@ -281,6 +281,15 @@ namespace templateGraph {
             polygon.Fill = Brushes.Red;
             if (myPath != null)
                 myPath.Stroke = Brushes.Red;
+            foreach (Relation r1 in MainWindow.Relations) {
+                if (r1.polygon == polygon) {
+                    foreach (Relation r2 in MainWindow.Relations) {
+                        if (r2.ConStart == r1.ConEnd && r1.ConStart == r2.ConEnd) {
+                            r2.polygon.Fill = Brushes.Red;
+                        }
+                    }
+                }
+            }
         }
 
         private void OnMouseLeaveArrow(object sender, RoutedEventArgs e) {
@@ -290,6 +299,15 @@ namespace templateGraph {
             polygon.Fill = Brushes.Black;
             if (myPath != null)
                 myPath.Stroke = Brushes.Black;
+            foreach (Relation r1 in MainWindow.Relations) {
+                if (r1.polygon == polygon) {
+                    foreach (Relation r2 in MainWindow.Relations) {
+                        if (r2.ConStart == r1.ConEnd && r1.ConStart == r2.ConEnd) {
+                            r2.polygon.Fill = Brushes.Black;
+                        }
+                    }
+                }
+            }
         }
 
         public static ContextMenu ArrowMenu = new ContextMenu();
