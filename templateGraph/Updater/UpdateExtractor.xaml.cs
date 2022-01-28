@@ -11,7 +11,7 @@ namespace Graph.Updater {
     /// Interaction logic for UpdateExtractor.xaml
     /// </summary>
     public partial class UpdateExtractor : Window {
-        
+
 
         ProgressBar progressBar;
 
@@ -38,7 +38,7 @@ namespace Graph.Updater {
             try {
 
                 WebClient webClient = new WebClient();
-                webClient.DownloadFileAsync(new Uri("http://graphice.me/graph/25fg3v6xs42c13/Graph.zip"),
+                webClient.DownloadFileAsync(new Uri(UpdateChecker.mainLink + "graph/25fg3v6xs42c13/Graph.zip"),
                     @".\Graph.zip");
                 webClient.DownloadProgressChanged += (s, e) => {
                     progressBar.Value = e.ProgressPercentage;
@@ -53,7 +53,7 @@ namespace Graph.Updater {
 
 
                 };
-                
+
                 webClient.Dispose();
 
             } catch (Exception e) {
