@@ -36,15 +36,13 @@ namespace Graph.MongoDB {
 
         public static void EstablishConnection() {
             try {
-                Client = new MongoClient("mongodb+srv://GraphICE:wd9c1PwaGldGYI6K@graphcluster.f67ke.mongodb.net/test");
-                Database = Client.GetDatabase(DatabaseName);
-                Collection = Database.GetCollection<BsonDocument>(CollectionName);
-                IsConnected = true;
-                Connector.IncrementData(Connector.DataType.appOpen);
+                //Client = new MongoClient("mongodb+srv://GraphICE:wd9c1PwaGldGYI6K@graphcluster.f67ke.mongodb.net/test");
+                //Database = Client.GetDatabase(DatabaseName);
+                //Collection = Database.GetCollection<BsonDocument>(CollectionName);
+                //IsConnected = false; //change to true whenever you get back teh database
+                //Connector.IncrementData(Connector.DataType.appOpen);
             } catch (Exception) {
-                Application.Current.Dispatcher.BeginInvoke(new Action(() => {
-                    
-                }));
+                MessageBox.Show("Error");
             }
         }
 
